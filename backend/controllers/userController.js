@@ -1,5 +1,7 @@
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { verifyEmail } from "../emailVerify/verifyEmail.js";
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
@@ -30,6 +32,17 @@ export const register = async (req, res) => {
       password: hashPassWord,
     });
 
+    const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
+      expiresIn: "10m",
+    });
+    const info = await verifyEmail(token, email);
+    if (!info || !info.messageId) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send verification email", 
+      });
+    }
+    newUser.token = token;
     const userResponse = newUser.toObject();
     delete userResponse.password;
 
