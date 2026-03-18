@@ -5,7 +5,10 @@ import {
   verify,
   reVerify,
   login,
-  logout
+  logout,
+  forgotPassword,
+  verifyOTP,
+  changePassword
 } from "../controllers/userController.js";
 import { isAuthanticated } from "../middleware/isAuthanticated.js";
 
@@ -13,6 +16,9 @@ router.post("/register", register);
 router.post("/verify", verify);
 router.post("/reverify", reVerify);
 router.post("/login", login);
-router.get('/logout',isAuthanticated,logout);
+router.post('/logout',isAuthanticated,logout);
+router.post("/forgot-password", forgotPassword);
+router.post("/verify-otp/:email", verifyOTP);
+router.post("/change-password/:email", changePassword);
 export default router;
  

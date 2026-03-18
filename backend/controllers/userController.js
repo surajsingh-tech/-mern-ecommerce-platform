@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { verifyEmail } from "../emailVerify/verifyEmail.js";
 import { Session } from "../models/sessionModel.js";
+import { sendOTPMail } from "../emailVerify/sendOTPMail.js";
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
@@ -228,15 +229,14 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    const  userId  = req.id; 
-    if(!userId)
-    {
+    const userId = req.id;
+    if (!userId) {
       return res.status(400).json({
-      success: false,
-      message: 'User ID is required',
-    });
+        success: false,
+        message: "User ID is required",
+      });
     }
-    
+
     await Session.deleteMany({ userId });
     await User.findByIdAndUpdate(userId, { isLoggedIn: false });
     return res.status(200).json({
@@ -250,3 +250,139 @@ export const logout = async (req, res) => {
     });
   }
 };
+
+export const forgotPassword= async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(404).json({
+        success: false,
+        message: "Email is Required",
+      });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes in ms
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    await user.save();
+    await sendOTPMail(otp, email);
+    return res.status(200).json({
+      success: true,
+      message: "OTP send to email successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const verifyOTP = async (req, res) => {
+  try {
+    const { otp } = req.body;
+    const { email } = req.params;
+    if (!email || !otp) {
+      return res.status(400).json({
+        success: false,
+        message: "email or otp must required",
+      });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    if (!user.otp || !user.otpExpiry) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP is not genrated or already verifyed",
+      });
+    }
+    if (user.otpExpiry < new Date()) {
+      return res.status(400).json({
+        success: false,
+        message: "Otp has expired please request a new one",
+      });
+    }
+    if (otp !== user.otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Otp is invalid",
+      });
+    }
+
+    user.otp = null;
+    user.otpExpiry = null;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      message: "OTP verified successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { newPassword, confirmPassword } = req.body;
+    const { email } = req.params;
+    if (!newPassword || !confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are mandatory",
+      });
+    }
+    if (newPassword.length < 6 || confirmPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must at least 6 characters",
+      });
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Password do not Match",
+      });
+    }
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "email are required",
+      });
+    }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "user not found",
+      });
+    }
+    const hashPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashPassword;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      message: "Password change successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+

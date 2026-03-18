@@ -27,7 +27,6 @@ export const verifyEmail = async (token, email) => {
         </a>
       `,
     });
-    console.log("Message sent:", info.messageId);
     return info;
   } catch (error) {
     console.error("Error sending email:", error.message);
