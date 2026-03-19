@@ -251,7 +251,7 @@ export const logout = async (req, res) => {
   }
 };
 
-export const forgotPassword= async (req, res) => {
+export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) {
@@ -386,3 +386,30 @@ export const changePassword = async (req, res) => {
   }
 };
 
+export const getUserById = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      res.status(400).json({
+        sucess: false,
+        message: "user id is required",
+      });
+    }
+    const user = await User.findById(userId).select("-otp -otpExpiry -token")
+    if (!user) {
+      res.status(404).json({
+        sucess: false,
+        message: "user not found",
+      });
+    }
+     res.status(200).json({
+      sucess: true,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      sucess: false,
+      message: error.message,
+    });
+  }
+};

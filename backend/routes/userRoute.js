@@ -8,9 +8,11 @@ import {
   logout,
   forgotPassword,
   verifyOTP,
-  changePassword
+  changePassword,
+  getUserById
 } from "../controllers/userController.js";
-import { isAuthanticated } from "../middleware/isAuthanticated.js";
+import { isAdmin, isAuthanticated } from "../middleware/isAuthanticated.js";
+import { getAllUsers } from "../controllers/adminController.js";
 
 router.post("/register", register);
 router.post("/verify", verify);
@@ -20,5 +22,8 @@ router.post('/logout',isAuthanticated,logout);
 router.post("/forgot-password", forgotPassword);
 router.post("/verify-otp/:email", verifyOTP);
 router.post("/change-password/:email", changePassword);
+router.get('/get-user/:userId',getUserById)
+//Admin Routes
+router.get('/all-users',isAuthanticated,isAdmin,getAllUsers)
 export default router;
  

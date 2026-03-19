@@ -1,9 +1,9 @@
 import { User } from "../models/userModel.js";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export const isAuthanticated = async (req, res, next) => {
   try {
-     const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(500).json({
         status: false,
@@ -20,7 +20,7 @@ export const isAuthanticated = async (req, res, next) => {
         message: "User not found",
       });
     }
-    
+    req.user=user
     req.id = user._id;
     next();
   } catch (error) {
@@ -35,6 +35,26 @@ export const isAuthanticated = async (req, res, next) => {
         message: "Token Verification Failed",
       });
     }
+    return res.status(500).json({
+      status: false,
+      message: error.message,
+    });
+  }
+};
+
+export const isAdmin = async (req, res,next) => {
+  try {
+    if(req.user && req.user.role === "admin")
+    {
+      next()
+    }
+    else{
+       return res.status(403).json({
+      status: false,
+      message: "Access denide : admins only",
+    });
+    }
+  } catch (error) {
     return res.status(500).json({
       status: false,
       message: error.message,
