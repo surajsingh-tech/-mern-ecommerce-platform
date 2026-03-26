@@ -8,6 +8,7 @@ import MainLayput from "./components/MainLayput";
 import Verify from "./pages/Verify";
 import VerifyEmail from "./pages/VerifyEmail";
 import Footer from "./components/Footer";
+import Profile from "./components/Profile";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -19,12 +20,12 @@ export default function App() {
           index: true,
           element: (
             <>
-              {" "}
-              <Home /> <Footer />{" "}
+              <Home /> <Footer />
             </>
           ),
         },
         { path: "/about", element: <About /> },
+        { path: "/profile/:userId", element: <Profile /> },
       ],
     },
     {

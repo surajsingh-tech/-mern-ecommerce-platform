@@ -63,7 +63,7 @@ export default function Navbar() {
           </Link>
 
           {user && (
-            <Link to="/profile" className="hover:text-blue-600 transition">
+            <Link to={`/profile/${user._id}`} className="hover:text-blue-600 transition">
               {user?.firstName}
             </Link>
           )}

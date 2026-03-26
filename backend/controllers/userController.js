@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { verifyEmail } from "../emailVerify/verifyEmail.js";
 import { Session } from "../models/sessionModel.js";
 import { sendOTPMail } from "../emailVerify/sendOTPMail.js";
+import cloudinary from "../utils/cloudinary.js";
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
@@ -395,16 +396,95 @@ export const getUserById = async (req, res) => {
         message: "user id is required",
       });
     }
-    const user = await User.findById(userId).select("-otp -otpExpiry -token")
+    const user = await User.findById(userId).select("-otp -otpExpiry -token");
     if (!user) {
       res.status(404).json({
         sucess: false,
         message: "user not found",
       });
     }
-     res.status(200).json({
+    res.status(200).json({
       sucess: true,
       user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      sucess: false,
+      message: error.message,
+    });
+  }
+};
+
+export const updateUserProfile = async (req, res) => {
+  try {
+    const userIdToUpdate = req.params.id;
+    const loggedInUser = req.user; // from isAuthanticated
+    const {
+      firstName,
+      lastName,
+      city,
+      address,
+      zipCode,
+      email,
+      phoneNo,
+      role,
+    } = req.body;
+    if (
+      loggedInUser._id.toString() !== userIdToUpdate &&
+      loggedInUser.role !== "admin"
+    ) {
+      return res.status(403).json({
+        sucess: false,
+        message: "You are not allowed to update this profile",
+      });
+    }
+
+    let user = await User.findById(userIdToUpdate);
+    if (!user) {
+      res.status(404).json({
+        sucess: false,
+        message: "User not found",
+      });
+    }
+    let profilePicUrl = user.profilePic;
+    let profilePublicId = user.profilePublicId;
+
+    //If a new file is uploaded
+    if (req.file) {
+      if (profilePublicId) {
+        await cloudinary.uploader.destroy(profilePublicId);
+      }
+      const uploadResult = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: "profiles" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          },
+        );
+        stream.end(req.file.buffer);
+      });
+      profilePicUrl = uploadResult.secure_url;
+      profilePublicId = uploadResult.public_id;
+    }
+    //Update Fields
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.city = city || user.city;
+    user.address = address || user.address;
+    user.zipCode = zipCode || user.zipCode;
+    user.email = email || user.email;
+    user.phoneNo = phoneNo || user.phoneNo;
+    user.role = role || user.role;
+    user.profilePic = profilePicUrl;
+    user.profilePublicId = profilePublicId;
+
+    const updateUser = await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile Updeted Successfully",
+      user: updateUser,
     });
   } catch (error) {
     res.status(500).json({
