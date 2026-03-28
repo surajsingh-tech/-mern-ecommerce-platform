@@ -392,24 +392,24 @@ export const getUserById = async (req, res) => {
     const { userId } = req.params;
     if (!userId) {
       res.status(400).json({
-        sucess: false,
+        success: false,
         message: "user id is required",
       });
     }
     const user = await User.findById(userId).select("-otp -otpExpiry -token");
     if (!user) {
       res.status(404).json({
-        sucess: false,
+        success: false,
         message: "user not found",
       });
     }
     res.status(200).json({
-      sucess: true,
+      success: true,
       user,
     });
   } catch (error) {
     res.status(500).json({
-      sucess: false,
+      success: false,
       message: error.message,
     });
   }
@@ -434,7 +434,7 @@ export const updateUserProfile = async (req, res) => {
       loggedInUser.role !== "admin"
     ) {
       return res.status(403).json({
-        sucess: false,
+        success: false,
         message: "You are not allowed to update this profile",
       });
     }
@@ -442,7 +442,7 @@ export const updateUserProfile = async (req, res) => {
     let user = await User.findById(userIdToUpdate);
     if (!user) {
       res.status(404).json({
-        sucess: false,
+        success: false,
         message: "User not found",
       });
     }
@@ -488,7 +488,7 @@ export const updateUserProfile = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      sucess: false,
+      success: false,
       message: error.message,
     });
   }
