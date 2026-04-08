@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white">
+    <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           
@@ -35,13 +35,10 @@ export default function Hero() {
           <div className="flex justify-center">
             <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg">
               <img
-                src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5"
+                src="./images/sliders/s_4.webp"
                 alt="Electronics"
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                className="rounded-2xl  w-full h-auto object-cover"
               />
-
-              {/* Glow Effect */}
-              <div className="absolute inset-0 rounded-2xl bg-white/10 blur-2xl -z-10"></div>
             </div>
           </div>
 
