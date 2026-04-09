@@ -10,6 +10,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile";
 import Products from "./pages/ProductsPage";
+import Cart from "./pages/Cart";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,8 @@ export default function App() {
         { path: "/about", element: <About /> },
         { path: "/profile/:userId", element: <Profile /> },
         { path: "/products", element: <Products/> },
+        { path: "/cart", element: <Cart/> },
+
       ],
     },
     {
