@@ -66,8 +66,8 @@ export const addToCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId,
-        items: [{ productId, quantity: 1, price: product.price }],
-        totalPrice: product.price,
+        items: [{ productId, quantity: 1, price: product.productPrice }],
+        totalPrice: product.productPrice,
       });
     } else {
       //find if product already in cart
@@ -82,7 +82,7 @@ export const addToCart = async (req, res) => {
         cart.items.push({
           productId,
           quantity: 1,
-          price: product.price,
+          price: product.productPrice,
         });
       }
 
@@ -140,7 +140,7 @@ export const updateQuantity = async (req, res) => {
     if (type === "decrease" && item.quantity > 1) item.quantity -= 1;
 
     cart.totalPrice = cart.items.reduce(
-      (acc, item) => acc + Number(item.price * quantity),
+      (acc, item) => acc + Number(item.price * item.quantity),
       0,
     );
 
@@ -148,6 +148,7 @@ export const updateQuantity = async (req, res) => {
     cart = await cart.populate("items.productId");
     return res.status(200).json({
       success: true,
+      message: "Quantity updated successfully",
       cart,
     });
   } catch (error) {
@@ -173,12 +174,16 @@ export const removeFromCart = async (req, res) => {
     cart.items = cart.items.filter(
       (item) => item.productId.toString() !== productId.toString(),
     );
+
     cart.totalPrice = cart.items.reduce(
       (acc, item) => acc + Number(item.price * item.quantity),
       0,
     );
 
     await cart.save();
+    if (cart.items.length > 0) {
+      cart = await cart.populate("items.productId");
+    }
     return res.status(200).json({
       success: true,
       message: "item remove successfully",

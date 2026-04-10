@@ -5,7 +5,7 @@ export default function Features() {
   const features = [
     {
       title: "Free Shipping",
-      desc: "On orders over $50",
+      desc: "On orders over ₹ 299",
       icon: Truck,
       bg: "bg-blue-100",
       text: "text-blue-600",

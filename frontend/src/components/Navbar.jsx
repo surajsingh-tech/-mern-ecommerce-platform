@@ -6,18 +6,19 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import {  setUser } from "@/redux/userSlice";
+import { setUser } from "@/redux/userSlice";
+import { setCart } from "@/redux/productSlice";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const {user} = useSelector((store) => store.user) || {}; 
+  const dispatch = useDispatch();
+  const { user } = useSelector((store) => store.user) || {};
   const [menuOpen, setMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
-  
+  const cart = useSelector((store) => store.product?.cart || []);
   const logoutHandler = async () => {
     try {
-      const res =await axios.post(
+      const res = await axios.post(
         "http://localhost:3000/api/v1/user/logout",
         {},
         {
@@ -28,7 +29,9 @@ export default function Navbar() {
       );
       if (res.data.success) {
         toast.success(res.data.message);
-        dispatch(setUser(null))
+        dispatch(setUser(null));
+        dispatch(setCart([]));
+        localStorage.removeItem("accessToken");
       }
     } catch (error) {
       if (error.response) {
@@ -63,7 +66,10 @@ export default function Navbar() {
           </Link>
 
           {user && (
-            <Link to={`/profile/${user._id}`} className="hover:text-blue-600 transition">
+            <Link
+              to={`/profile/${user._id}`}
+              className="hover:text-blue-600 transition"
+            >
               {user?.firstName}
             </Link>
           )}
@@ -72,7 +78,7 @@ export default function Navbar() {
           <Link to="/cart" className="relative">
             <ShoppingCart className="w-6 h-6" />
             <span className="absolute -top-2 -right-3 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full">
-              0
+              {cart?.items?.length || 0}
             </span>
           </Link>
 
@@ -131,7 +137,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-2"
           >
-            <ShoppingCart /> Cart (0)
+            <ShoppingCart /> Cart ({cart && cart?.items.length})
           </Link>
 
           {user ? (
