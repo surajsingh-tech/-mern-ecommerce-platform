@@ -15,6 +15,7 @@ export default function Navbar() {
   const { user } = useSelector((store) => store.user) || {};
   const [menuOpen, setMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
+  const admin = user?.role === "admin" ? true : false;
   const cart = useSelector((store) => store.product?.cart || []);
   const logoutHandler = async () => {
     try {
@@ -71,6 +72,15 @@ export default function Navbar() {
               className="hover:text-blue-600 transition"
             >
               {user?.firstName}
+            </Link>
+          )}
+
+          {admin && (
+            <Link
+              to={`/dashboard/sales`}
+              className="hover:text-blue-600 transition"
+            >
+              Dashboard
             </Link>
           )}
 
