@@ -33,7 +33,8 @@ export const getCart = async (req, res) => {
 export const addToCart = async (req, res) => {
   try {
     const userId = req.id;
-    const { productId } = req.body;
+    const { productId, quantity } = req.body;
+    const qty = Number(quantity) > 0 ? Number(quantity) : 1;
 
     if (!userId) {
       return res.status(404).json({
@@ -66,7 +67,7 @@ export const addToCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId,
-        items: [{ productId, quantity: 1, price: product.productPrice }],
+        items: [{ productId, quantity: qty, price: product.productPrice }],
         totalPrice: product.productPrice,
       });
     } else {
@@ -76,12 +77,12 @@ export const addToCart = async (req, res) => {
       );
       if (itemIndex > -1) {
         //if Product exists -> just increase quantity
-        cart.items[itemIndex].quantity += 1;
+        cart.items[itemIndex].quantity += qty;
       } else {
         //if new product then push
         cart.items.push({
           productId,
-          quantity: 1,
+          quantity: qty,
           price: product.productPrice,
         });
       }

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { ShoppingCart } from "lucide-react";
+import { Loader2, ShoppingCart } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   if (!product) return null;
+  const [loader, setLoader] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const addToCart = async (productId) => {
     try {
+      setLoader(true);
       const res = await axios.post(
         `http://localhost:3000/api/v1/cart/add`,
         { productId },
@@ -34,6 +37,8 @@ export default function ProductCard({ product }) {
       } else {
         toast.error("Something went wrong ❌");
       }
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -45,6 +50,7 @@ export default function ProductCard({ product }) {
           src={product?.productImage[0]?.url || "/fallback.png"}
           alt={product?.productName || "Product"}
           className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+          onClick={() => navigate(`/products/${product?._id}`)}
         />
       </div>
 
@@ -59,8 +65,15 @@ export default function ProductCard({ product }) {
         <Button
           className="bg-pink-600 w-full flex items-center justify-center hover:bg-pink-700 gap-2 text-sm sm:text-base"
           onClick={() => addToCart(product._id)}
+          disabled={loader}
         >
-          <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
+          {loader ? (
+            <Loader2 className="w-16 h-16 animate-spin " />
+          ) : (
+            <>
+              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
+            </>
+          )}
         </Button>
       </div>
     </div>

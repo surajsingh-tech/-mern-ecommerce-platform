@@ -147,7 +147,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-2"
           >
-            <ShoppingCart /> Cart ({cart && cart?.items.length})
+            <ShoppingCart /> Cart ({cart?.items?.length || 0})
           </Link>
 
           {user ? (

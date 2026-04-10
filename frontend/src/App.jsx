@@ -21,6 +21,7 @@ import ShowUserOrders from "./pages/adminPages/ShowUserOrders";
 import UserInfo from "./pages/adminPages/UserInfo";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import PageNotFound from "./pages/PageNotFound";
+import SingleProduct from "./pages/SingleProduct";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -46,6 +47,7 @@ export default function App() {
           ),
         },
         { path: "products", element: <Products /> },
+        { path: "products/:id", element: <SingleProduct /> },
         {
           path: "cart",
           element: (
@@ -96,9 +98,9 @@ export default function App() {
       element: <VerifyEmail />,
     },
     {
-      path: '*',
-      element : <PageNotFound/>
-    }
+      path: "*",
+      element: <PageNotFound />,
+    },
   ]);
   return (
     <>
