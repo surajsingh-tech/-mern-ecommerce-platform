@@ -5,4 +5,4 @@ const storage = multer.memoryStorage();
 export const singleUpload = multer({storage}).single('file')
 
 //Multiple uploads upto 5 images 
-export const multiUpload = multer({storage}).array('file',5)
+export const multiUpload = multer({storage}).array('files',5)

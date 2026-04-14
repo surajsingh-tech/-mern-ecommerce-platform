@@ -60,14 +60,12 @@ export default function App() {
           path: "dashboard",
           element: (
             <ProtectedRoutes adminOnly={true}>
-              {" "}
-              <AdminDashboard />{" "}
+              <AdminDashboard />
             </ProtectedRoutes>
           ),
           children: [
             { path: "sales", element: <AdminSales /> },
             { path: "add-product", element: <AddProduct /> },
-            { path: "admin-deshboard", element: <AdminDashboard /> },
             { path: "orders", element: <AdminOrders /> },
             { path: "products", element: <AdminProduct /> },
             { path: "users", element: <AdminUsers /> },

@@ -76,10 +76,7 @@ export default function Navbar() {
           )}
 
           {admin && (
-            <Link
-              to={`/dashboard/sales`}
-              className="hover:text-blue-600 transition"
-            >
+            <Link to={`/dashboard`} className="hover:text-blue-600 transition">
               Dashboard
             </Link>
           )}
@@ -139,6 +136,12 @@ export default function Navbar() {
               className="block"
             >
               Hello User
+            </Link>
+          )}
+
+          {admin && (
+            <Link to={`/dashboard`} className="block">
+              Dashboard
             </Link>
           )}
 

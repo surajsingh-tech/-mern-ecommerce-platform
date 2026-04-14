@@ -15,8 +15,6 @@ export default function FilterSidebar({
   category,
   setCategory,
 }) {
-  console.log("filter all Product", allProduct);
-
   const uniqueCategory = [
     "All",
     ...new Set(allProduct?.map((p) => p?.category)),
