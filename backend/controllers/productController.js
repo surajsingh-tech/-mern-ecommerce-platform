@@ -120,11 +120,12 @@ export const deleteProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     if (!productId) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
         message: "Product id not found",
       });
     }
+    
     const product = await Product.findById(productId);
     if (!product) {
       return res.status(404).json({
@@ -132,6 +133,7 @@ export const deleteProduct = async (req, res) => {
         message: "Product not found",
       });
     }
+
     //Delete images from cloudinary
     if (product.productImage && product.productImage.length > 0) {
       for (let img of product.productImage) {
@@ -142,7 +144,7 @@ export const deleteProduct = async (req, res) => {
     //Delete Product from mongodb
     await Product.findByIdAndDelete(productId);
 
-    return res.status(500).json({
+    return res.status(200).json({
       success: true,
       message: "Product deleted Successfully",
     });
@@ -157,6 +159,12 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const { productId } = req.params;
+    if (!productId) {
+      return res.status(400).json({
+        success: false,
+        message: "Product id not found",
+      });
+    }
     const {
       productName,
       productDesc,
@@ -166,6 +174,12 @@ export const updateProduct = async (req, res) => {
       existingImages,
     } = req.body;
 
+    if (!productName || !productDesc || !productPrice || !category || !brand) {
+      return res.status(400).json({
+        success: false,
+        message: "All field are Mandatory",
+      });
+    }
     const product = await Product.findById(productId);
 
     if (!product) {

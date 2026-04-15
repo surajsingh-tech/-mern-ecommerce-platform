@@ -26,7 +26,7 @@ export default function AddProduct() {
     productDesc: "",
     brand: "",
     category: "",
-    productImg: [],
+    productImage: [],
   });
   const products = useSelector((store) => store.product.products || []);
   const accessToken = localStorage.getItem("accessToken");
@@ -40,7 +40,7 @@ export default function AddProduct() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (prodectData.productImg.length > 5) {
+    if (prodectData.productImage.length > 5) {
       toast.error("Only upto 5 images are Allowed");
       return;
     }
@@ -76,11 +76,11 @@ export default function AddProduct() {
     formDAta.append("brand", prodectData.brand.trim());
     formDAta.append("category", prodectData.category.trim());
 
-    if (prodectData.productImg.length === 0) {
+    if (prodectData.productImage.length === 0) {
       toast.error("Please Select atleast one Image");
       return;
     }
-    prodectData.productImg.forEach((img) => formDAta.append("files", img));
+    prodectData.productImage.forEach((img) => formDAta.append("files", img));
     try {
       setLoader(true);
       const res = await axios.post(
@@ -101,7 +101,7 @@ export default function AddProduct() {
           productDesc: "",
           brand: "",
           category: "",
-          productImg: [],
+          productImage: [],
         });
       }
     } catch (error) {
@@ -189,7 +189,7 @@ export default function AddProduct() {
 
             {/* Image Upload */}
             <ImageUpload
-              productImages={prodectData.productImg}
+              productImages={prodectData.productImage}
               setProductData={setProductData}
             />
           </div>

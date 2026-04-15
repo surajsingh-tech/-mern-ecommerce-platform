@@ -182,7 +182,14 @@ export default function Products() {
                 </div>
               </div>
             ) : (
-              <NoDataAvailable />
+              <NoDataAvailable
+                title={"No products found"}
+                description={
+                  "We couldn’t find any products matching your criteria. Try adjusting your filters or search again."
+                }
+                buttonText={"goto Home Page"}
+                navigateTo={"/"}
+              />
             )}
           </div>
         </div>

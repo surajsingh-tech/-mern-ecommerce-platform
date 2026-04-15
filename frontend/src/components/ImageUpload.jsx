@@ -11,14 +11,14 @@ export default function ImageUpload({ productImages, setProductData }) {
     if (files.length > 0) {
       setProductData((pre) => ({
         ...pre,
-        productImg: [...productImages, ...files],
+        productImage: [...productImages, ...files],
       }));
     }
   };
   const removeImage = (indx) => {
     setProductData((pre) => {
-      const updateImage = productImages.filter((_, index) => index !== indx);
-      return { ...pre, productImg: updateImage };
+      const updateImage = productImages?.filter((_, index) => index !== indx);
+      return { ...pre, productImage: updateImage };
     });
   };
   return (
@@ -33,15 +33,15 @@ export default function ImageUpload({ productImages, setProductData }) {
         onChange={handleFiles}
       />
 
-      <Button variant="outline" className="w-full sm:w-fit">
+      <Button variant="outline" type="button" className="w-full sm:w-fit ">
         <label htmlFor="file-upload" className="cursor-pointer w-full">
           Upload Images
         </label>
       </Button>
 
-      {productImages.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          {productImages.map((file, indx) => {
+      {productImages?.length > 0 && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 m-5">
+          {productImages?.map((file, indx) => {
             let preview;
 
             if (file instanceof File) preview = URL.createObjectURL(file);
@@ -50,7 +50,7 @@ export default function ImageUpload({ productImages, setProductData }) {
             else return null;
 
             return (
-              <Card key={indx} className="relative group">
+              <Card key={indx} className="relative group ">
                 <CardContent className="p-2">
                   <img
                     src={preview}
@@ -58,6 +58,7 @@ export default function ImageUpload({ productImages, setProductData }) {
                   />
 
                   <Button
+                    type="button"
                     onClick={() => removeImage(indx)}
                     className="absolute top-1 right-1 bg-black/60 text-white w-8 h-8 p-0 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
                   >
