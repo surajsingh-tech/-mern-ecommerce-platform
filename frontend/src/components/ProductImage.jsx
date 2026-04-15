@@ -7,19 +7,19 @@ export default function ProductImage({ images }) {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 w-full">
-      <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible pb-2">
+      <div className="flex md:flex-col gap-0 overflow-x-auto md:overflow-visible">
         {images?.map((img, indx) => (
           <img
             src={img?.url}
             onClick={() => setMainImage(img?.url)}
             alt="image"
             key={indx}
-            className="cursor-pointer w-20 h-20 object-cover border-2 border-transparent hover:border-pink-500 rounded-lg shadow-md hover:scale-105 transition"
+            className="cursor-pointer w-25 h-30 object-contain border-2 border-transparent hover:border-pink-500 rounded-lg shadow-md hover:scale-105 transition"
           />
         ))}
       </div>
 
-      <div className="w-full flex justify-center items-center bg-gray-50 rounded-xl p-4 shadow-inner">
+      <div className="w-full flex justify-center items-center bg-gray-50 rounded-xl p-3 shadow-inner">
         <Zoom>
           <img
             src={mainImage}
@@ -29,7 +29,7 @@ export default function ProductImage({ images }) {
               sm:w-[320px] sm:h-[320px]
               md:w-[420px] md:h-[420px]
               lg:w-[500px] lg:h-[500px]
-              object-contain rounded-xl shadow-lg hover:scale-105 transition duration-300
+              object-cover rounded-xl shadow-lg hover:scale-105 transition duration-300
             "
           />
         </Zoom>

@@ -65,9 +65,8 @@ export default function ProductDesc({ product }) {
       {/* Price + Stock */}
       <div className="flex flex-wrap items-center gap-3">
         <h2 className="text-pink-600 font-bold text-2xl sm:text-3xl">
-          ₹ {product?.productPrice}
+          ₹ {new Intl.NumberFormat("en-IN").format(product?.productPrice)}
         </h2>
-
         <span className="text-green-600 text-xs sm:text-sm font-medium bg-green-100 px-2 py-1 rounded-md">
           In Stock
         </span>
@@ -102,7 +101,7 @@ export default function ProductDesc({ product }) {
             <Loader2 className="w-16 h-16 animate-spin " />
           ) : (
             <>
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />  Add to Cart 
+              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
             </>
           )}
         </Button>
