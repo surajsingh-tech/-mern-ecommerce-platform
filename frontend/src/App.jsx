@@ -24,7 +24,7 @@ import PageNotFound from "./pages/PageNotFound";
 import SingleProduct from "./pages/SingleProduct";
 import AddressForm from "./pages/AddressForm";
 import OrderSuccess from "./pages/OrderSuccess";
-import Orders from "./pages/Orders";
+import MyOrders from "./pages/MyOrders";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -63,7 +63,7 @@ export default function App() {
           path: "orders",
           element: (
             <ProtectedRoutes>
-              <Orders />
+              <MyOrders />
             </ProtectedRoutes>
           ),
         },

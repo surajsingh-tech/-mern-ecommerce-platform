@@ -15,7 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "sonner";
 import { setUser } from "@/redux/userSlice";
-import UserLogo from '../assets/user.jpg'
+import UserLogo from "../assets/user.jpg";
+import MyOrders from "@/pages/MyOrders";
 export default function Profile() {
   const { userId } = useParams();
 
@@ -35,7 +36,7 @@ export default function Profile() {
     role: user?.role ?? "",
   });
   const [previewOpen, setPreviewOpen] = useState(false);
-  
+
   const [file, setFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -132,7 +133,7 @@ export default function Profile() {
                     <img
                       src={updateUser?.profilePic || UserLogo}
                       alt="Profile"
-                      onClick={() => setPreviewOpen(true)} 
+                      onClick={() => setPreviewOpen(true)}
                       className="h-35 w-35  md:w-55 md:h-45 lg:w-50 lg:h-50  rounded-full object-cover border-4 border-pink-800"
                     />
                     <Label
@@ -266,18 +267,7 @@ export default function Profile() {
             </div>
           </TabsContent>
           <TabsContent value="orders">
-            <Card>
-              <CardHeader>
-                <CardTitle>Orders</CardTitle>
-                <CardDescription>
-                  Track performance and user engagement metrics. Monitor trends
-                  and identify growth opportunities.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Page views are up 25% compared to last month.
-              </CardContent>
-            </Card>
+            <MyOrders />
           </TabsContent>
         </Tabs>
       </div>
