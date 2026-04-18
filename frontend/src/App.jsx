@@ -22,6 +22,9 @@ import UserInfo from "./pages/adminPages/UserInfo";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import PageNotFound from "./pages/PageNotFound";
 import SingleProduct from "./pages/SingleProduct";
+import AddressForm from "./pages/AddressForm";
+import OrderSuccess from "./pages/OrderSuccess";
+import Orders from "./pages/Orders";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -57,6 +60,30 @@ export default function App() {
           ),
         },
         {
+          path: "orders",
+          element: (
+            <ProtectedRoutes>
+              <Orders />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "address",
+          element: (
+            <ProtectedRoutes>
+              <AddressForm />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "order-success",
+          element: (
+            <ProtectedRoutes>
+              <OrderSuccess />
+            </ProtectedRoutes>
+          ),
+        },
+        {
           path: "dashboard",
           element: (
             <ProtectedRoutes adminOnly={true}>
@@ -70,7 +97,7 @@ export default function App() {
             { path: "products", element: <AdminProduct /> },
             { path: "users", element: <AdminUsers /> },
             { path: "users/orders/:userId", element: <ShowUserOrders /> },
-            { path: "users/:id", element: <UserInfo /> },
+            { path: "users/:userId", element: <UserInfo /> },
           ],
         },
       ],

@@ -417,7 +417,7 @@ export const getUserById = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
   try {
-    const userIdToUpdate = req.params.id;
+    const userIdToUpdate = req.params.userId;
     const loggedInUser = req.user; // from isAuthanticated
     const {
       firstName,

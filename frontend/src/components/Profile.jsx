@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "sonner";
 import { setUser } from "@/redux/userSlice";
+import UserLogo from '../assets/user.jpg'
 export default function Profile() {
   const { userId } = useParams();
 
@@ -34,12 +35,7 @@ export default function Profile() {
     role: user?.role ?? "",
   });
   const [previewOpen, setPreviewOpen] = useState(false);
-  const ImagePreview = () => {
-    const [updateUser, setUpdateUser] = useState({
-      profilePic: "/images/avatars/user.jpg", // default image
-    });
-  };
-
+  
   const [file, setFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
@@ -134,7 +130,7 @@ export default function Profile() {
                   {/* profile picture */}
                   <div className="flex flex-col justify-center items-center ">
                     <img
-                      src={updateUser.profilePic || "/images/avatars/user.jpg"}
+                      src={updateUser?.profilePic || UserLogo}
                       alt="Profile"
                       onClick={() => setPreviewOpen(true)} 
                       className="h-35 w-35  md:w-55 md:h-45 lg:w-50 lg:h-50  rounded-full object-cover border-4 border-pink-800"

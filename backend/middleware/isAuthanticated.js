@@ -20,7 +20,7 @@ export const isAuthanticated = async (req, res, next) => {
         message: "User not found",
       });
     }
-    req.user=user
+    req.user = user;
     req.id = user._id;
     next();
   } catch (error) {
@@ -42,17 +42,15 @@ export const isAuthanticated = async (req, res, next) => {
   }
 };
 
-export const isAdmin = async (req, res,next) => {
+export const isAdmin = async (req, res, next) => {
   try {
-    if(req.user && req.user.role === "admin")
-    {
-      next()
-    }
-    else{
-       return res.status(403).json({
-      status: false,
-      message: "Access denide : admins only",
-    });
+    if (req.user && req.user.role === "admin") {
+      next();
+    } else {
+      return res.status(403).json({
+        status: false,
+        message: "Access denide : admins only",
+      });
     }
   } catch (error) {
     return res.status(500).json({

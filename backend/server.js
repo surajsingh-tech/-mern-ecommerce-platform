@@ -4,6 +4,7 @@ import connectDB from "./database/db.js";
 import userRoute from "./routes/userRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import productRoute from "./routes/productRoute.js";
+import oderRoutes from "./routes/orderRoute.js";
 import cors from "cors";
 
 const app = express();
@@ -19,7 +20,7 @@ app.use(
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/cart", cartRoute);
-
+app.use("/api/v1/orders", oderRoutes);
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server is listen at PORT  http://localhost:${PORT}`);
