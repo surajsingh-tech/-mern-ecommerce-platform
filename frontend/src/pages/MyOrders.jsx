@@ -9,8 +9,9 @@ import { toast } from "sonner";
 export default function MyOrders() {
   const accessToken = localStorage.getItem("accessToken");
 
-  // ✅ FIX: null se array (important)
   const [userOrder, setUserOrder] = useState([]);
+  console.log("userOrder", userOrder);
+
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -115,6 +116,9 @@ export default function MyOrders() {
                       className="flex items-center gap-3 bg-gray-50 p-2 rounded-lg"
                     >
                       <img
+                        onClick={() =>
+                          navigate(`/products/${product?.productId?._id}`)
+                        }
                         src={product?.productId?.productImage?.[0]?.url}
                         className="w-10 h-10 md:w-12 md:h-12 rounded-md object-cover"
                       />
