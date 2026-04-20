@@ -55,7 +55,7 @@ export default function AdminProduct() {
   const searchValue = debouncedSearch?.toLowerCase()?.trim();
   const [sort, setSort] = useState("");
 
-  let filterProducts = useMemo(() => {
+  const filterProducts = useMemo(() => {
     let result = allProducts?.filter((p) => {
       if (!searchValue) return true;
 
@@ -68,11 +68,11 @@ export default function AdminProduct() {
     });
 
     if (sort === "loToHigh") {
-      result = [...result].sort((a, b) => a?.productPrice - b?.productPrice);
+      result = [...result].sort((a, b) => a.productPrice - b.productPrice);
     }
 
     if (sort === "highToLow") {
-      result = [...result].sort((a, b) => b?.productPrice - a?.productPrice);
+      result = [...result].sort((a, b) => b.productPrice - a.productPrice);
     }
 
     return result;
@@ -80,7 +80,7 @@ export default function AdminProduct() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditProduct((pre) => ({ ...pre, [name]: value }));
+    setEditProduct((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleEditClick = (product) => {
@@ -144,8 +144,7 @@ export default function AdminProduct() {
 
       if (res.data.success) {
         toast.success(res.data.message);
-        const updated = allProducts.filter((p) => p._id !== id);
-        dispatch(setProduct(updated));
+        dispatch(setProduct(allProducts.filter((p) => p._id !== id)));
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Error");
@@ -159,8 +158,9 @@ export default function AdminProduct() {
       {filterProducts?.length > 0 ? (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-6 lg:p-10">
           {/* HEADER */}
-          <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center mb-6">
-            <div className="relative w-full lg:w-[420px]">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-between items-stretch md:items-center mb-6">
+            {/* SEARCH */}
+            <div className="relative w-full md:max-w-xs">
               <Input
                 placeholder="Search products..."
                 className="pl-10 h-11 rounded-xl"
@@ -170,8 +170,9 @@ export default function AdminProduct() {
               <Search className="absolute left-3 top-3 text-gray-400 w-4 h-4" />
             </div>
 
+            {/* SORT */}
             <Select onValueChange={(value) => setSort(value)}>
-              <SelectTrigger className="w-full lg:w-[220px] h-11 rounded-xl bg-white">
+              <SelectTrigger className="w-full md:w-[200px] h-11 rounded-xl bg-white">
                 <SelectValue placeholder="Sort by price" />
               </SelectTrigger>
               <SelectContent>
@@ -181,9 +182,9 @@ export default function AdminProduct() {
             </Select>
           </div>
 
-          {/* PRODUCT GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filterProducts?.map((product) => (
+          {/* GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filterProducts.map((product) => (
               <Card
                 key={product._id}
                 className="p-4 rounded-2xl shadow-sm hover:shadow-md transition bg-white"
@@ -191,13 +192,14 @@ export default function AdminProduct() {
                 <div className="flex gap-3">
                   <img
                     src={product?.productImage?.[0]?.url}
-                    className="w-20 h-20 rounded-lg object-cover"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover"
                   />
 
                   <div className="flex-1">
-                    <h1 className="font-semibold line-clamp-2 text-sm">
+                    <h1 className="font-semibold line-clamp-2 text-sm sm:text-base">
                       {product.productName}
                     </h1>
+
                     <p className="text-gray-500 text-sm mt-1">
                       ₹{" "}
                       {new Intl.NumberFormat("en-IN").format(
@@ -205,6 +207,7 @@ export default function AdminProduct() {
                       )}
                     </p>
 
+                    {/* ACTIONS */}
                     <div className="flex gap-2 mt-3">
                       <Button
                         size="sm"
@@ -255,15 +258,13 @@ export default function AdminProduct() {
             ))}
           </div>
 
-          {/* EDIT DIALOG */}
+          {/* EDIT MODAL */}
           <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
             <DialogContent className="w-[95%] sm:max-w-[650px] max-h-[85vh] overflow-y-auto rounded-2xl">
               <form onSubmit={handleSave} className="space-y-4">
                 <DialogHeader>
                   <DialogTitle>Edit Product</DialogTitle>
-                  <DialogDescription>
-                    Update product details and save changes
-                  </DialogDescription>
+                  <DialogDescription>Update product details</DialogDescription>
                 </DialogHeader>
 
                 <Field>
@@ -299,7 +300,7 @@ export default function AdminProduct() {
                   setProductData={setEditProduct}
                 />
 
-                <DialogFooter className="flex gap-2">
+                <DialogFooter className="flex flex-col sm:flex-row gap-2">
                   <DialogClose asChild>
                     <Button variant="outline" className="flex-1">
                       Cancel
@@ -316,12 +317,10 @@ export default function AdminProduct() {
         </div>
       ) : (
         <NoDataAvailable
-          title={"No Products Found"}
-          description={
-            "There are currently no products in the system. Add new products to start managing your inventory."
-          }
-          buttonText={"Add Product"}
-          navigateTo={"/dashboard/add-product"}
+          title="No Products Found"
+          description="Add new products to start managing inventory."
+          buttonText="Add Product"
+          navigateTo="/dashboard/add-product"
         />
       )}
     </>

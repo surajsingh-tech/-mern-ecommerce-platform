@@ -76,7 +76,7 @@ export default function Navbar() {
           )}
 
           {admin && (
-            <Link to={`/dashboard`} className="hover:text-blue-600 transition">
+            <Link to={`/dashboard/sales`} className="hover:text-blue-600 transition">
               Dashboard
             </Link>
           )}

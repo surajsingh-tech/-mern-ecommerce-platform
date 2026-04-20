@@ -151,7 +151,6 @@ export default function Products() {
                   <p className="text-sm font text-gray-500">
                     Showing {filteredProducts.length} products
                   </p>
-
                   <Select onValueChange={(value) => setSortOrder(value)}>
                     <SelectTrigger className="w-full sm:w-[200px]">
                       <SelectValue placeholder="Sort by price" />
