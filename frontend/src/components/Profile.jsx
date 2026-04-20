@@ -9,8 +9,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Button } from "./ui/button";
-import { useParams } from "react-router-dom";
-import { Loader2 } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "sonner";
@@ -21,6 +21,8 @@ export default function Profile() {
   const { userId } = useParams();
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate()
 
   const { user } = useSelector((store) => store.user);
 
@@ -124,9 +126,15 @@ export default function Profile() {
           <TabsContent value="profile">
             <div>
               <div className="flex flex-col justify-center align-center items-center bg-gray-100">
-                <h1 className="font-bold mb-7 text-2xl sm:text-3xl md:text-4xl lg:text-7xl text-gray-800">
-                  Update Profile
-                </h1>
+                <div className="flex items-center justify-center">
+                  <Button onClick={() => navigate(-1)} variant="outline" size="icon" className='items-center mr-6 w-[80px] h-10 bg-pink-600 text-white hover:bg-black hover:text-white'>
+                    <ArrowLeft />
+                  </Button>
+                  <h1 className="font-bold mb-7 text-2xl sm:text-3xl md:text-4xl lg:text-7xl text-gray-800">
+                    Update Profile
+                  </h1>
+                </div>
+
                 <div className=" flex flex-col  sm:flex-row w-full  gap-10 justify-between items-center sm:items-start px-7 max-w-3xl sm:max-w-2xl lg:max-w-7xl  ">
                   {/* profile picture */}
                   <div className="flex flex-col justify-center items-center ">

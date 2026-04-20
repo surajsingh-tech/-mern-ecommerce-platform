@@ -17,7 +17,7 @@ import AddProduct from "./pages/adminPages/AddProduct";
 import AdminOrders from "./pages/adminPages/AdminOrders";
 import AdminProduct from "./pages/adminPages/AdminProduct";
 import AdminUsers from "./pages/adminPages/AdminUsers";
-import ShowUserOrders from "./pages/adminPages/ShowUserOrders";
+import ShowUserOrders from "./pages/adminPages/ShowUsersOrder";
 import UserInfo from "./pages/adminPages/UserInfo";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import PageNotFound from "./pages/PageNotFound";

@@ -7,12 +7,16 @@ import UserLogo from "../../assets/user.jpg";
 import { Button } from "@/components/ui/button";
 import useDebounce from "@/hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AdminUsers() {
   const accessToken = localStorage.getItem("accessToken");
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
+  console.log("users",users);
+  
+  
   const navigate = useNavigate();
   const filterUsers = useMemo(() => {
     const searchValue = debouncedSearch.trim().toLowerCase();
@@ -30,7 +34,7 @@ export default function AdminUsers() {
   const getAllUsres = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/v1/user/all-users",
+        "http://localhost:3000/api/v1/admin/all-users",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -89,10 +93,18 @@ export default function AdminUsers() {
                 {" "}
                 <Edit /> Edit{" "}
               </Button>
-              <Button>
-                {" "}
-                <Eye /> ShowOrder{" "}
-              </Button>
+              {user?.role !== "admin" ? (
+                <Button
+                  onClick={() =>
+                    navigate(`/dashboard/users/orders/${user?._id}`)
+                  }
+                >
+                  {" "}
+                  <Eye /> ShowOrder{" "}
+                </Button>
+              ) : (
+                <Button variant="outline" >admin</Button>
+              )}
             </div>
           </div>
         ))}
