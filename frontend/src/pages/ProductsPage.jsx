@@ -16,16 +16,20 @@ import NoDataAvailable from "@/components/NoDataAvailable";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "@/redux/productSlice";
+import { useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 999999]);
   const allProduct = useSelector((store) => store.product.products || []);
+  const [searchParams] = useSearchParams();
+  const categoryFromUrl = searchParams.get("category") || "All";
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState(categoryFromUrl);
   const [brand, setBrand] = useState("All");
   const [sortOrder, setSortOrder] = useState("");
+
   const dispatch = useDispatch();
 
   const getAllProducts = async () => {
