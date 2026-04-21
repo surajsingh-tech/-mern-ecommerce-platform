@@ -62,6 +62,11 @@ export default function Navbar() {
           <Link to="/" className="hover:text-blue-600 transition">
             Home
           </Link>
+          {/* About */}
+          <Link to={`/about`} className="hover:text-blue-600 transition">
+            About
+          </Link>
+
           <Link to="/products" className="hover:text-blue-600 transition">
             Products
           </Link>
@@ -76,18 +81,23 @@ export default function Navbar() {
           )}
 
           {admin && (
-            <Link to={`/dashboard/sales`} className="hover:text-blue-600 transition">
+            <Link
+              to={`/dashboard/sales`}
+              className="hover:text-blue-600 transition"
+            >
               Dashboard
             </Link>
           )}
 
           {/* Cart */}
-          <Link to="/cart" className="relative">
-            <ShoppingCart className="w-6 h-6" />
-            <span className="absolute -top-2 -right-3 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full">
-              {cart?.items?.length || 0}
-            </span>
-          </Link>
+          {!admin && (
+            <Link to="/cart" className="relative">
+              <ShoppingCart className="w-6 h-6" />
+              <span className="absolute -top-2 -right-3 bg-pink-500 text-white text-xs px-2 py-0.5 rounded-full">
+                {cart?.items?.length || 0}
+              </span>
+            </Link>
+          )}
 
           {/* Auth Button */}
           {user ? (

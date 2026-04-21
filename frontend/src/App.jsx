@@ -54,7 +54,7 @@ export default function App() {
         {
           path: "cart",
           element: (
-            <ProtectedRoutes>
+            <ProtectedRoutes userOnly={true}>
               <Cart />
             </ProtectedRoutes>
           ),
@@ -62,7 +62,7 @@ export default function App() {
         {
           path: "orders",
           element: (
-            <ProtectedRoutes>
+            <ProtectedRoutes userOnly={true}>
               <MyOrders />
             </ProtectedRoutes>
           ),
@@ -70,7 +70,7 @@ export default function App() {
         {
           path: "address",
           element: (
-            <ProtectedRoutes>
+            <ProtectedRoutes userOnly={true}>
               <AddressForm />
             </ProtectedRoutes>
           ),
@@ -78,7 +78,7 @@ export default function App() {
         {
           path: "order-success",
           element: (
-            <ProtectedRoutes>
+            <ProtectedRoutes userOnly={true}>
               <OrderSuccess />
             </ProtectedRoutes>
           ),

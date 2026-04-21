@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import NoDataAvailable from './NoDataAvailable';
-import Loader from './Loader';
+import NoDataAvailable from "./NoDataAvailable";
+import Loader from "./Loader";
 
-export default function OrderCart({userOrder,loading}) {
-  
+export default function OrderCart({ userOrder, loading }) {
   const navigate = useNavigate();
   return (
-       <div className="min-h-screen bg-gray-50 py-6">
+    <div className="min-h-screen bg-gray-50 py-6">
       <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
@@ -22,13 +21,11 @@ export default function OrderCart({userOrder,loading}) {
               My Orders
             </h1>
             <p className="text-xs text-gray-500">Track your purchases</p>
-          </div> 
+          </div>
         </div>
 
         {/* Loading */}
-        {loading && (
-          <Loader/>
-        )}
+        {loading && <Loader />}
 
         {/* No Orders */}
         {!loading && userOrder.length === 0 ? (
@@ -110,5 +107,5 @@ export default function OrderCart({userOrder,loading}) {
         )}
       </div>
     </div>
-  )
+  );
 }

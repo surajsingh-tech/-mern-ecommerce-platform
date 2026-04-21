@@ -57,14 +57,14 @@ export default function Features() {
 
   return (
     <section className="py-8 sm:py-10 bg-gradient-to-b from-gray-50 to-gray-100">
-      
       {/* Heading */}
       <div className="text-center mb-8 sm:mb-10 px-4">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-pink-600">
           Why Choose Us
         </h2>
         <p className="text-gray-500 text-xs sm:text-sm mt-2 max-w-xl mx-auto">
-          We provide the best experience with top-quality electronics and trusted services.
+          We provide the best experience with top-quality electronics and
+          trusted services.
         </p>
       </div>
 
@@ -76,13 +76,11 @@ export default function Features() {
             className="rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition duration-300"
           >
             <CardContent className="flex flex-col items-center text-center p-5 sm:p-6">
-              
               {/* Icon */}
               <div className="mb-3">
                 {React.cloneElement(item.icon, {
                   className:
-                    item.icon.props.className +
-                    " w-9 h-9 sm:w-10 sm:h-10",
+                    item.icon.props.className + " w-9 h-9 sm:w-10 sm:h-10",
                 })}
               </div>
 

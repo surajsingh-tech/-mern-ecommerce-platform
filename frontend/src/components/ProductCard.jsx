@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { Edit, Loader2, ShoppingCart } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "@/redux/productSlice";
 import { useNavigate } from "react-router-dom";
+import store from "@/redux/store";
 
 export default function ProductCard({ product }) {
   if (!product) return null;
@@ -13,6 +14,7 @@ export default function ProductCard({ product }) {
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((store) => store.user.user);
   const addToCart = async (productId) => {
     try {
       setLoader(true);
@@ -62,19 +64,35 @@ export default function ProductCard({ product }) {
         <h2 className="font-bold text-pink-700 text-base sm:text-lg md:text-xl">
           ₹ {new Intl.NumberFormat("en-IN").format(product?.productPrice)}
         </h2>
-        <Button
-          className="bg-pink-600 w-full flex items-center justify-center hover:bg-pink-700 gap-2 text-sm sm:text-base"
-          onClick={() => addToCart(product._id)}
-          disabled={loader}
-        >
-          {loader ? (
-            <Loader2 className="w-16 h-16 animate-spin " />
-          ) : (
-            <>
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
-            </>
-          )}
-        </Button>
+        {user.role === "admin" ? (
+          <Button
+            className="bg-pink-600 w-full flex items-center justify-center hover:bg-pink-700 gap-2 text-sm sm:text-base"
+            disabled={loader}
+            onClick={() => navigate(`/dashboard/products?product=${product._id}`)}
+          >
+            {loader ? (
+              <Loader2 className="w-16 h-16 animate-spin " />
+            ) : (
+              <>
+                <Edit className="w-4 h-4 sm:w-5 sm:h-5" /> Edit Products
+              </>
+            )}
+          </Button>
+        ) : (
+          <Button
+            className="bg-pink-600 w-full flex items-center justify-center hover:bg-pink-700 gap-2 text-sm sm:text-base"
+            onClick={() => addToCart(product._id)}
+            disabled={loader}
+          >
+            {loader ? (
+              <Loader2 className="w-16 h-16 animate-spin " />
+            ) : (
+              <>
+                <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </div>
   );

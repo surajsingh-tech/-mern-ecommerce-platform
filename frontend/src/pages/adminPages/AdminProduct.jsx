@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Edit, Loader2, Search, Trash2 } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -40,12 +40,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import useDebounce from "@/hooks/useDebounce";
 import NoDataAvailable from "@/components/NoDataAvailable";
+import { useSearchParams } from "react-router-dom";
+
 
 export default function AdminProduct() {
   const allProducts = useSelector((store) => store.product.products || []);
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
-
   const [editProduct, setEditProduct] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -53,6 +54,12 @@ export default function AdminProduct() {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
   const searchValue = debouncedSearch?.toLowerCase()?.trim();
+
+  //if user click edit product from home or order page
+  const [searchParams] = useSearchParams()
+  const product = searchParams.get('product'||'')
+  const editItem =  allProducts?.find(p=>p._id === product)
+
   const [sort, setSort] = useState("");
 
   const filterProducts = useMemo(() => {
@@ -152,6 +159,14 @@ export default function AdminProduct() {
       setDltId(null);
     }
   };
+
+  //
+  useEffect(()=>{
+    if(editItem)
+    {
+      handleEditClick(editItem)
+    }
+  },[editItem])
 
   return (
     <>

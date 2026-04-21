@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "@/redux/productSlice";
 import { Loader2, ShoppingCart } from "lucide-react";
 
@@ -12,6 +12,9 @@ export default function ProductDesc({ product }) {
   const dispatch = useDispatch();
   const [qty, setQTY] = useState(1);
   const [loader, setLoader] = useState(false);
+  //check user is admin
+  const user = useSelector(store=>store.user.user||'')
+  const isAdmin = user.role==="admin"
   const addToCart = async (productId) => {
     try {
       setLoader(true);
@@ -64,7 +67,7 @@ export default function ProductDesc({ product }) {
 
       {/* Price + Stock */}
       <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-pink-600 font-bold text-2xl sm:text-3xl">
+        <h2 className="text-pink-600 font-bold text-xl ">
           ₹ {new Intl.NumberFormat("en-IN").format(product?.productPrice)}
         </h2>
         <span className="text-green-600 text-xs sm:text-sm font-medium bg-green-100 px-2 py-1 rounded-md">
@@ -81,6 +84,7 @@ export default function ProductDesc({ product }) {
       <div className="flex items-center gap-3 mt-2">
         <p className="font-semibold text-sm sm:text-base">Qty:</p>
         <Input
+          readOnly={isAdmin}
           type="number"
           value={qty}
           min={1}
@@ -94,7 +98,7 @@ export default function ProductDesc({ product }) {
       <div className="flex flex-col sm:flex-row gap-3 mt-4 w-full">
         <Button
           onClick={() => addToCart(product?._id)}
-          disabled={loader}
+          disabled={loader || isAdmin}
           className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-xl shadow-md hover:shadow-lg transition w-full sm:w-auto"
         >
           {loader ? (
@@ -109,6 +113,7 @@ export default function ProductDesc({ product }) {
         <Button
           variant="outline"
           className="border-pink-500 text-pink-600 hover:bg-pink-50 px-6 py-2 rounded-xl w-full sm:w-auto"
+          disabled={loader||isAdmin}
         >
           Buy Now
         </Button>
