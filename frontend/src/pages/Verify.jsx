@@ -23,6 +23,7 @@ export default function Verify() {
       );
       if (res.data.success) {
         toast.success(res.data.message);
+        navigate('/verify-otp')
       }
     } catch (error) {
       if (error.response) {

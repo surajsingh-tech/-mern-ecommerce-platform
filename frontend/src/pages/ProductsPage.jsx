@@ -69,14 +69,14 @@ export default function Products() {
     }
 
     if (category !== "All") {
-      filtered = filtered.filter((p) => p.category === category);
+      filtered = filtered?.filter((p) => p.category === category);
     }
 
     if (brand !== "All") {
-      filtered = filtered.filter((p) => p.brand === brand);
+      filtered = filtered?.filter((p) => p.brand === brand);
     }
 
-    filtered = filtered.filter(
+    filtered = filtered?.filter(
       (p) => p.productPrice >= priceRange[0] && p.productPrice <= priceRange[1],
     );
 

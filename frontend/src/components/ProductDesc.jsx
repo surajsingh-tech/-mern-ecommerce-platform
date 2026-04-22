@@ -6,18 +6,28 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "@/redux/productSlice";
 import { Loader2, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductDesc({ product }) {
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const [qty, setQTY] = useState(1);
+  const navigate = useNavigate();
+  const [readMore, setReadMore] = useState(false);
   const [loader, setLoader] = useState(false);
-  //check user is admin
-  const user = useSelector(store=>store.user.user||'')
-  const isAdmin = user.role==="admin"
+
+  const user = useSelector((store) => store.user.user || "");
+  const isAdmin = user?.role === "admin";
+
   const addToCart = async (productId) => {
     try {
       setLoader(true);
+
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
       const res = await axios.post(
         `http://localhost:3000/api/v1/cart/add`,
         { productId, quantity: qty },
@@ -25,7 +35,7 @@ export default function ProductDesc({ product }) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        },
+        }
       );
 
       if (res.data.success) {
@@ -52,44 +62,60 @@ export default function ProductDesc({ product }) {
   };
 
   return (
-    <div className="flex flex-col gap-5 w-full px-2 sm:px-4 md:px-0">
+    <div className="flex flex-col gap-4 sm:gap-5 w-full px-3 sm:px-4 md:px-0">
       {/* Title */}
-      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-gray-900 leading-snug">
+      <h1 className="font-bold text-xl sm:text-2xl md:text-3xl text-gray-900">
         {product?.productName}
       </h1>
 
       {/* Category + Brand */}
-      <p className="text-gray-500 text-xs sm:text-sm md:text-base flex flex-wrap gap-1">
-        <span className="font-medium text-gray-700">{product?.category}</span>
+      <p className="text-gray-500 text-xs sm:text-sm flex flex-wrap gap-1">
+        <span className="font-medium text-gray-700">
+          {product?.category}
+        </span>
         <span>•</span>
-        <span className="text-pink-500 font-medium">{product?.brand}</span>
+        <span className="text-pink-500 font-medium">
+          {product?.brand}
+        </span>
       </p>
 
-      {/* Price + Stock */}
-      <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-pink-600 font-bold text-xl ">
+      {/* Price */}
+      <div className="flex items-center gap-3">
+        <h2 className="text-pink-600 font-bold text-lg sm:text-xl">
           ₹ {new Intl.NumberFormat("en-IN").format(product?.productPrice)}
         </h2>
-        <span className="text-green-600 text-xs sm:text-sm font-medium bg-green-100 px-2 py-1 rounded-md">
+        <span className="text-green-600 text-xs bg-green-100 px-2 py-1 rounded-md">
           In Stock
         </span>
       </div>
 
-      {/* Description */}
-      <p className="text-gray-700 leading-relaxed text-sm sm:text-base line-clamp-4 sm:line-clamp-6">
-        {product?.ProductDescription}
-      </p>
+      <div className="flex flex-col gap-1">
+        <p
+          className={`text-gray-700 text-sm sm:text-base leading-relaxed transition-all duration-300 ${
+            readMore ? "" : "line-clamp-3 sm:line-clamp-4"
+          }`}
+        >
+          {product?.productDesc}
+        </p>
+
+        <button
+          onClick={() => setReadMore(!readMore)}
+          className="text-pink-600 text-sm font-medium hover:underline w-fit"
+        >
+          {readMore ? "Read Less ▲" : "Read More ▼"}
+        </button>
+      </div>
 
       {/* Quantity */}
       <div className="flex items-center gap-3 mt-2">
-        <p className="font-semibold text-sm sm:text-base">Qty:</p>
+        <p className="font-semibold text-sm">Qty:</p>
         <Input
           readOnly={isAdmin}
           type="number"
           value={qty}
           min={1}
           max={1000}
-          className="w-16 sm:w-20 text-center border-gray-300 focus:border-pink-500 focus:ring-pink-500"
+          className="w-16 text-center"
           onChange={(e) => handleQtyValue(Number(e.target.value))}
         />
       </div>
@@ -99,13 +125,14 @@ export default function ProductDesc({ product }) {
         <Button
           onClick={() => addToCart(product?._id)}
           disabled={loader || isAdmin}
-          className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-xl shadow-md hover:shadow-lg transition w-full sm:w-auto"
+          className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-xl w-full sm:w-auto flex items-center justify-center gap-2"
         >
           {loader ? (
-            <Loader2 className="w-16 h-16 animate-spin " />
+            <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
             <>
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" /> Add to Cart
+              <ShoppingCart className="w-4 h-4" />
+              Add to Cart
             </>
           )}
         </Button>
@@ -113,7 +140,7 @@ export default function ProductDesc({ product }) {
         <Button
           variant="outline"
           className="border-pink-500 text-pink-600 hover:bg-pink-50 px-6 py-2 rounded-xl w-full sm:w-auto"
-          disabled={loader||isAdmin}
+          disabled={loader || isAdmin }
         >
           Buy Now
         </Button>

@@ -150,6 +150,16 @@ export default function Login() {
               )}
             </div>
 
+            <div className="flex justify-end mt-2">
+              <button
+                type="button"
+                onClick={() => navigate("/forgot-password")}
+                className="text-sm text-gray-500 hover:underline hover:text-gray-700"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
             <Button
               type="submit"
               className="w-full mt-2 bg-gradient-to-r from-pink-500 to-purple-500 hover:scale-105 transition duration-200"

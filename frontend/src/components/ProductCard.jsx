@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((store) => store.user.user);
+  const user = useSelector((store) => store.user.user || "");
   const addToCart = async (productId) => {
     try {
       setLoader(true);
@@ -64,11 +64,13 @@ export default function ProductCard({ product }) {
         <h2 className="font-bold text-pink-700 text-base sm:text-lg md:text-xl">
           ₹ {new Intl.NumberFormat("en-IN").format(product?.productPrice)}
         </h2>
-        {user.role === "admin" ? (
+        {user?.role === "admin" ? (
           <Button
             className="bg-pink-600 w-full flex items-center justify-center hover:bg-pink-700 gap-2 text-sm sm:text-base"
             disabled={loader}
-            onClick={() => navigate(`/dashboard/products?product=${product._id}`)}
+            onClick={() =>
+              navigate(`/dashboard/products?product=${product._id}`)
+            }
           >
             {loader ? (
               <Loader2 className="w-16 h-16 animate-spin " />

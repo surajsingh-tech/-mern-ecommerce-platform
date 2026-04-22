@@ -25,6 +25,9 @@ import SingleProduct from "./pages/SingleProduct";
 import AddressForm from "./pages/AddressForm";
 import OrderSuccess from "./pages/OrderSuccess";
 import MyOrders from "./pages/MyOrders";
+import ForgetPassword from "./pages/ForgotPassword";
+import OtpValidation from "./pages/OtpVerify";
+import ChangePassword from "./pages/ChangePassword";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -122,6 +125,9 @@ export default function App() {
       path: "/verify/:token",
       element: <VerifyEmail />,
     },
+    { path: "forgot-password", element: <ForgetPassword /> },
+    { path: "change-password/:email", element: <ChangePassword /> },
+    { path: "verify-otp/:email", element: <OtpValidation /> },
     {
       path: "*",
       element: <PageNotFound />,

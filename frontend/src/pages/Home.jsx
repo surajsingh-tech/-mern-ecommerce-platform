@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const productsData = useSelector((store) => store.product.products || []);
-  console.log("productsData ", productsData);
-
   const allCategory = [...new Set(productsData?.map((p) => p?.category))];
 
   return (
