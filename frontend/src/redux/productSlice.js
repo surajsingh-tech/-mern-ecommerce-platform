@@ -40,5 +40,6 @@ export const {
   addAddress,
   setSelectedAddress,
   deleteAddress,
+  setBuyNow
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as yup from "yup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,28 +10,11 @@ import {
   setSelectedAddress,
 } from "@/redux/productSlice";
 import { ArrowLeft, Trash2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-
-const addressSchema = yup.object().shape({
-  fullName: yup.string().required("Full name is required"),
-  phone: yup
-    .string()
-    .matches(/^[0-9]{10}$/, "Phone must be 10 digits")
-    .required(),
-  email: yup.string().email().required(),
-  address: yup.string().required(),
-  city: yup.string().required(),
-  state: yup.string().required(),
-  zipCode: yup
-    .string()
-    .matches(/^[0-9]{5,6}$/)
-    .required(),
-  country: yup.string().required(),
-});
+import { addressSchema } from "../validation/addressSchema.js";
+import OrderSummary from "@/components/OrderSummary.jsx";
 
 export default function AddressForm() {
   const dispatch = useDispatch();
@@ -184,9 +166,6 @@ export default function AddressForm() {
         <div>
           <div className="text-center mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold">Address Page</h1>
-            <p className="text-gray-500 text-sm sm:text-base mt-1">
-              Fill your delivery details
-            </p>
           </div>
 
           {showForm ? (
@@ -200,6 +179,9 @@ export default function AddressForm() {
               </Button>
 
               <div className="bg-white shadow rounded-2xl border p-4 sm:p-6">
+                <p className="text-gray-500 text-sm sm:text-base my-1">
+                  Fill your delivery details
+                </p>
                 <form
                   onSubmit={handleSubmit}
                   className="space-y-4 sm:space-y-6"
@@ -284,37 +266,13 @@ export default function AddressForm() {
         </div>
 
         {/* RIGHT */}
-        <div className="lg:sticky lg:top-24">
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-              <div className="flex justify-between text-sm sm:text-base">
-                <span>Subtotal ({cart?.items?.length})</span>
-                <span>₹{subTotal}</span>
-              </div>
-
-              <div className="flex justify-between text-sm sm:text-base">
-                <span>Shipping</span>
-                <span>₹{shipping}</span>
-              </div>
-
-              <div className="flex justify-between text-sm sm:text-base">
-                <span>Tax</span>
-                <span>₹{tax}</span>
-              </div>
-
-              <Separator />
-
-              <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
-                <span>₹{Total}</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <OrderSummary
+          cart={cart}
+          subTotal={subTotal}
+          shipping={shipping}
+          tax={tax}
+          Total={Total}
+        />
       </div>
     </div>
   );

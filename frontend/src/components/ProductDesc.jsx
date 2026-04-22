@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "@/redux/productSlice";
+import { setBuyNow, setCart } from "@/redux/productSlice";
 import { Loader2, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function ProductDesc({ product }) {
   const [readMore, setReadMore] = useState(false);
   const [loader, setLoader] = useState(false);
 
-  const user = useSelector((store) => store.user.user || "");
+  const user = useSelector((store) => store?.user?.user || "");
   const isAdmin = user?.role === "admin";
 
   const addToCart = async (productId) => {
@@ -35,7 +35,7 @@ export default function ProductDesc({ product }) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       );
 
       if (res.data.success) {
@@ -61,6 +61,41 @@ export default function ProductDesc({ product }) {
     }
   };
 
+  const handleBuyNow = async (productId) => {
+    try {
+      setLoader(true);
+
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
+      const res = await axios.post(
+        `http://localhost:3000/api/v1/cart/add`,
+        { productId, quantity: qty },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      if (res.data.success) {
+        dispatch(setCart(res.data.cart));
+        navigate('/cart')
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else if (error.request) {
+        toast.error("Server not responding ⚠️");
+      } else {
+        toast.error("Something went wrong ❌");
+      }
+    } finally {
+      setLoader(false);
+    }
+  };
   return (
     <div className="flex flex-col gap-4 sm:gap-5 w-full px-3 sm:px-4 md:px-0">
       {/* Title */}
@@ -70,13 +105,9 @@ export default function ProductDesc({ product }) {
 
       {/* Category + Brand */}
       <p className="text-gray-500 text-xs sm:text-sm flex flex-wrap gap-1">
-        <span className="font-medium text-gray-700">
-          {product?.category}
-        </span>
+        <span className="font-medium text-gray-700">{product?.category}</span>
         <span>•</span>
-        <span className="text-pink-500 font-medium">
-          {product?.brand}
-        </span>
+        <span className="text-pink-500 font-medium">{product?.brand}</span>
       </p>
 
       {/* Price */}
@@ -139,8 +170,9 @@ export default function ProductDesc({ product }) {
 
         <Button
           variant="outline"
+          onClick={() => handleBuyNow(product?._id)}
           className="border-pink-500 text-pink-600 hover:bg-pink-50 px-6 py-2 rounded-xl w-full sm:w-auto"
-          disabled={loader || isAdmin }
+          disabled={loader || isAdmin}
         >
           Buy Now
         </Button>
