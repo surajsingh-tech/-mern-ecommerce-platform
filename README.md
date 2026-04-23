@@ -1,191 +1,149 @@
-# 🛒 MERN E-Commerce App (Electronics Store)
+🛒 MERN E-Commerce Platform (Electronics Store)
 
-A full-stack **E-Commerce Web Application** built using the MERN stack with authentication, payments, admin dashboard, and analytics.
+A full-stack E-Commerce Web Application built using the MERN stack with authentication, payments, admin dashboard, and analytics.
 
----
+🔗 Live Demo: https://mern-ecommerce-platform-seven.vercel.app
 
-## 🚀 Features
+🚀 Features
 
-### 👤 User Features
+👤 User Features
+User Authentication (Login / Register / Email Verification)
+Browse Electronics Products
+View Product Details
+Add to Cart / Remove from Cart
+Address Management
+Secure Checkout with Razorpay
+Order Confirmation Page
+My Orders History
 
-* User Authentication (Login / Register / Email Verification)
-* Browse Electronics Products
-* View Single Product Details
-* Add to Cart
-* Address Management
-* Secure Checkout with Razorpay
-* Order Success Page
-* My Orders Page
+🛠️ Admin Features
+Secure Admin Dashboard
+Sales Analytics (Last 30 Days)
+Add / Update / Delete Products
+Manage Orders
+Manage Users
+View User Details & Orders
 
----
+🧭 Application Routes
 
-### 🛠️ Admin Features
+🌐 Public Routes
+/ → Home Page
+/about → About Page
+/products → All Products
+/products/:id → Product Details
 
-* Protected Admin Dashboard
-* Sales Analytics (Last 30 Days Chart)
-* Add / Manage Products
-* Manage Orders
-* Manage Users
-* View Individual User Info & Orders
+🔐 Authentication Routes
+/signup → Register User
+/login → Login User
+/verify → OTP Verification
+/verify/:token → Email Verification
 
----
+👤 User Protected Routes
+/profile/:userId → User Profile
+/cart → Cart Page
+/address → Address Form
+/orders → My Orders
+/order-success → Order Success Page
 
-## 🧭 Application Routes
+🛠️ Admin Protected Routes
+/dashboard → Admin Dashboard
+/dashboard/sales → Sales Analytics
+/dashboard/add-product → Add Product
+/dashboard/products → Manage Products
+/dashboard/orders → Manage Orders
+/dashboard/users → Manage Users
+/dashboard/users/:userId → User Info
+/dashboard/users/orders/:userId → User Orders
 
-### 🌐 Public Routes
+🧠 Architecture
+Frontend (React + Tailwind + shadcn/ui)
+        ↓ REST API (Axios)
+Backend (Node.js + Express.js)
+        ↓
+MongoDB Atlas (Database)
+        ↓
+Razorpay (Payments)
 
-* `/` → Home
-* `/about` → About Page
-* `/products` → All Products
-* `/products/:id` → Single Product
+📊 Admin Dashboard Includes
+Total Users
+Total Products
+Total Orders
+Total Revenue
+Sales Analytics Chart (Last 30 Days)|
 
----
+🔐 Security Features
+JWT Authentication
+Role-Based Access Control (User / Admin)
+Protected API Routes
+Environment Variables for Sensitive Data
+Secure Payment Flow (Razorpay)
+⚙️ Tech Stack
 
-### 🔐 Auth Routes
+Frontend
+- React.js
+- Redux Toolkit (State Management)
+- React Router DOM
+- Tailwind CSS
+- shadcn/ui
+- Recharts
+- Axios
 
-* `/signup` → Register
-* `/login` → Login
-* `/verify` → OTP Verification
-* `/verify/:token` → Email Verification
+Backend
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT Authentication
 
----
+Services
+- Razorpay Payment Gateway
+- MongoDB Atlas
+- Vercel (Frontend Hosting)
+- Render (Backend Hosting)
 
-### 👤 Protected User Routes
-
-* `/profile/:userId` → User Profile
-* `/cart` → Cart Page
-* `/address` → Address Form
-* `/orders` → My Orders
-* `/order-success` → Order Success Page
-
----
-
-### 🛠️ Admin Routes (Protected)
-
-* `/dashboard` → Admin Dashboard
-
-  * `/dashboard/sales` → Sales Analytics
-  * `/dashboard/add-product` → Add Product
-  * `/dashboard/products` → Manage Products
-  * `/dashboard/orders` → Manage Orders
-  * `/dashboard/users` → Manage Users
-  * `/dashboard/users/:userId` → User Info
-  * `/dashboard/users/orders/:userId` → User Orders
-
----
-
-## 🧠 Project Highlights
-
-* Complete MERN Stack Implementation
-* Role-based Protected Routes (User / Admin)
-* Sales Analytics using MongoDB Aggregation
-* Razorpay Payment Integration
-* Clean & Responsive UI using **shadcn/ui + Tailwind CSS**
-
----
-
-## 📦 Tech Stack
-
-**Frontend:**
-
-* React.js
-* React Router DOM
-* Tailwind CSS
-* shadcn/ui
-* Recharts
-
-**Backend:**
-
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-
-**Other Tools:**
-
-* Razorpay API
-* JWT Authentication
-* Axios
-
----
-
-## 📊 Admin Dashboard Includes
-
-* Total Users
-* Total Products
-* Total Orders
-* Total Sales
-* Sales Chart (Last 30 Days)
-
----
-
-## 🔐 Security Features
-
-* JWT Authentication
-* Protected Routes (Admin & User)
-* Secure API Handling
-* Environment Variables for Sensitive Data
-
----
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone Repository
-
-```bash
+🚀 Installation & Setup
+1️⃣ Clone Repository
 git clone https://github.com/surajsingh-tech/-mern-ecommerce-platform.git
-cd ./-mern-ecommerce-platform
-```
-
-### 2️⃣ Backend Setup
-
-```bash
+cd -mern-ecommerce-platform
+2️⃣ Backend Setup
 cd backend
 npm install
 npm start
-```
-
-### 3️⃣ Frontend Setup
-
-```bash
+3️⃣ Frontend Setup
 cd frontend
 npm install
 npm run dev
-```
 
----
+🔑 Environment Variables
 
-## 🔑 Environment Variables
+Create .env file in backend:
 
-Create `.env` in backend:
-
-```env
 PORT=5000
 MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret
+JWT_SECRET=your_jwt_secret
 RAZORPAY_KEY_ID=your_key
 RAZORPAY_KEY_SECRET=your_secret
-```
 
----
+🧠 System Design Highlights
+REST API Architecture
+Modular MVC Structure
+Scalable Folder Structure
+Aggregation Pipeline for Analytics
+Secure Payment Flow
 
-## 🚧 Deployment
+📚 What I Learned
+Full-stack MERN development workflow
+Deployment using Vercel & Render
+Authentication & Authorization (JWT)
+Payment gateway integration (Razorpay)
+Real-world admin dashboard development
+MongoDB aggregation for analytics
 
-> Currently running locally. Deployment will be added soon.
+🚧 Future Improvements
+Product Reviews & Ratings
+Wishlist Feature
+Advanced Search & Filters
+Coupon / Discount System
+Email Notifications
+🙌 Conclusion
 
----
-
-## 📌 Future Improvements
-
-* Multiple categories (currently Electronics only)
-* Product Reviews & Ratings
-* Wishlist Feature
-* Advanced Filters & Search
-
----
-
-## 🙌 Conclusion
-
-This project demonstrates a **real-world full-stack application** including authentication, payments, admin control, and analytics dashboard.
-
-
+This project is a real-world full-stack e-commerce application with authentication, payment integration, admin control, and analytics dashboard — fully deployed and production-ready.
