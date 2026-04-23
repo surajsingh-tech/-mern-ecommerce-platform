@@ -14,9 +14,8 @@ export default function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
-  console.log("users",users);
-  
-  
+  console.log("users", users);
+
   const navigate = useNavigate();
   const filterUsers = useMemo(() => {
     const searchValue = debouncedSearch.trim().toLowerCase();
@@ -34,7 +33,7 @@ export default function AdminUsers() {
   const getAllUsres = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/v1/admin/all-users",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/admin/all-users",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -103,7 +102,7 @@ export default function AdminUsers() {
                   <Eye /> ShowOrder{" "}
                 </Button>
               ) : (
-                <Button variant="outline" >admin</Button>
+                <Button variant="outline">admin</Button>
               )}
             </div>
           </div>

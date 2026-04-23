@@ -24,7 +24,7 @@ export default function Cart() {
   const handleUpdateQuantity = async (productId, type) => {
     try {
       const res = await axios.put(
-        "http://localhost:3000/api/v1/cart/update",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/update",
         { productId, type },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -42,7 +42,7 @@ export default function Cart() {
   const removeProductFromCart = async (productId) => {
     try {
       const res = await axios.delete(
-        "http://localhost:3000/api/v1/cart/remove",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/remove",
         {
           data: { productId },
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -63,9 +63,12 @@ export default function Cart() {
 
   const loadCart = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/v1/cart", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const res = await axios.get(
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart",
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        },
+      );
       if (res.data.success) {
         dispatch(setCart(res.data.cart));
       }
@@ -181,7 +184,10 @@ export default function Cart() {
                     <Button variant="outline">Apply</Button>
                   </div>
 
-                  <Button className="w-full" onClick={() => navigate("/address")}>
+                  <Button
+                    className="w-full"
+                    onClick={() => navigate("/address")}
+                  >
                     Place Order
                   </Button>
 

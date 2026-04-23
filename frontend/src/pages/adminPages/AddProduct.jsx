@@ -84,7 +84,7 @@ export default function AddProduct() {
     try {
       setLoader(true);
       const res = await axios.post(
-        "http://localhost:3000/api/v1/product/add",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/add",
         formDAta,
         {
           headers: {
@@ -116,7 +116,7 @@ export default function AddProduct() {
   };
 
   return (
-      <div className="w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mt-5 mx-auto px-3 sm:px-5 md:px-6">
+    <div className="w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mt-5 mx-auto px-3 sm:px-5 md:px-6">
       <Card className="shadow-sm w-full">
         <CardHeader className="pb-4">
           <CardTitle className="text-lg sm:text-xl font-semibold">

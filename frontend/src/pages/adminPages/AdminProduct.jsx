@@ -42,7 +42,6 @@ import useDebounce from "@/hooks/useDebounce";
 import NoDataAvailable from "@/components/NoDataAvailable";
 import { useSearchParams } from "react-router-dom";
 
-
 export default function AdminProduct() {
   const allProducts = useSelector((store) => store.product.products || []);
   const dispatch = useDispatch();
@@ -56,9 +55,9 @@ export default function AdminProduct() {
   const searchValue = debouncedSearch?.toLowerCase()?.trim();
 
   //if user click edit product from home or order page
-  const [searchParams] = useSearchParams()
-  const product = searchParams.get('product'||'')
-  const editItem =  allProducts?.find(p=>p._id === product)
+  const [searchParams] = useSearchParams();
+  const product = searchParams.get("product" || "");
+  const editItem = allProducts?.find((p) => p._id === product);
 
   const [sort, setSort] = useState("");
 
@@ -121,7 +120,7 @@ export default function AdminProduct() {
     try {
       setLoader(true);
       const res = await axios.put(
-        `http://localhost:3000/api/v1/product/update/${editProduct._id}`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/update/${editProduct._id}`,
         formData,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
@@ -145,7 +144,7 @@ export default function AdminProduct() {
     setDltId(id);
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/v1/product/delete/${id}`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/delete/${id}`,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
 
@@ -161,12 +160,11 @@ export default function AdminProduct() {
   };
 
   //
-  useEffect(()=>{
-    if(editItem)
-    {
-      handleEditClick(editItem)
+  useEffect(() => {
+    if (editItem) {
+      handleEditClick(editItem);
     }
-  },[editItem])
+  }, [editItem]);
 
   return (
     <>

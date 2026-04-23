@@ -48,7 +48,7 @@ export default function UserInfo() {
   const getUserDetails = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/v1/user/get-user/${userId}`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/get-user/${userId}`,
       );
       if (res.data.success) {
         setUserData(res.data.user);
@@ -101,7 +101,7 @@ export default function UserInfo() {
       }
 
       const res = await axios.put(
-        `http://localhost:3000/api/v1/user/update/${userId}`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/update/${userId}`,
         formData,
         {
           headers: {

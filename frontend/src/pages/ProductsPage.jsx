@@ -36,7 +36,7 @@ export default function Products() {
     try {
       setLoading(true);
       const res = await axios.get(
-        "http://localhost:3000/api/v1/product/getallproducts",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/getallproducts",
       );
       if (res.data.success) {
         dispatch(setProduct(res.data.products));

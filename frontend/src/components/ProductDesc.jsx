@@ -29,7 +29,7 @@ export default function ProductDesc({ product }) {
       }
 
       const res = await axios.post(
-        `http://localhost:3000/api/v1/cart/add`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/add`,
         { productId, quantity: qty },
         {
           headers: {
@@ -71,7 +71,7 @@ export default function ProductDesc({ product }) {
       }
 
       const res = await axios.post(
-        `http://localhost:3000/api/v1/cart/add`,
+        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/add`,
         { productId, quantity: qty },
         {
           headers: {
@@ -82,7 +82,7 @@ export default function ProductDesc({ product }) {
 
       if (res.data.success) {
         dispatch(setCart(res.data.cart));
-        navigate('/cart')
+        navigate("/cart");
       }
     } catch (error) {
       if (error.response) {

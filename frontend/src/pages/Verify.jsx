@@ -5,16 +5,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Verify() {
-  const email = useLocation()?.state?.email || "";  
+  const email = useLocation()?.state?.email || "";
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const resendMail = async() => {
+  const resendMail = async () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/reverify",
-        {email},
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/reverify",
+        { email },
         {
           headers: {
             "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export default function Verify() {
       );
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate('/verify-otp')
+        navigate("/verify-otp");
       }
     } catch (error) {
       if (error.response) {

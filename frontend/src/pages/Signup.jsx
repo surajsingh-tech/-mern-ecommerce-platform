@@ -72,7 +72,7 @@ export default function Signup() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/register",
+        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/register",
         formData,
       );
 
@@ -103,9 +103,11 @@ export default function Signup() {
       <Card className="w-full max-w-md backdrop-blur-xl bg-white/80 shadow-2xl rounded-3xl border border-gray-200">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">
-            Create Your Account 
+            Create Your Account
           </CardTitle>
-          <CardDescription>Join us for a better shopping experience</CardDescription>
+          <CardDescription>
+            Join us for a better shopping experience
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -121,7 +123,8 @@ export default function Signup() {
                   className={`mt-1.5 transition ${
                     errorMsg.firstName
                       ? "border-red-500"
-                      : validEntry?.firstName && "border-green-500 focus-visible:border-green-700"
+                      : validEntry?.firstName &&
+                        "border-green-500 focus-visible:border-green-700"
                   }`}
                 />
                 {errorMsg.firstName && (
@@ -141,7 +144,8 @@ export default function Signup() {
                   className={`mt-1.5 transition ${
                     errorMsg.lastName
                       ? "border-red-500"
-                      : validEntry?.lastName && "border-green-500 focus-visible:border-green-700"
+                      : validEntry?.lastName &&
+                        "border-green-500 focus-visible:border-green-700"
                   }`}
                 />
                 {errorMsg.lastName && (
@@ -163,7 +167,8 @@ export default function Signup() {
                 className={` mt-1.5 transition ${
                   errorMsg.email
                     ? "border-red-500"
-                    : validEntry?.email && "border-green-500 focus-visible:border-green-700"
+                    : validEntry?.email &&
+                      "border-green-500 focus-visible:border-green-700"
                 }`}
               />
               {errorMsg.email && (
@@ -184,7 +189,8 @@ export default function Signup() {
                   className={`mt-1.5 pr-10 ${
                     errorMsg.password
                       ? "border-red-500"
-                      : validEntry?.password && "border-green-500 focus-visible:border-green-700"
+                      : validEntry?.password &&
+                        "border-green-500 focus-visible:border-green-700"
                   }`}
                 />
 
