@@ -40,8 +40,8 @@ export default function Home() {
       <Hero />
       {loading ? (
         <Loader />
-      ) : productsData.length > 0 && allCategory.length > 0 ? (
-        allCategory.map((category) => (
+      ) : productsData?.length > 0 && allCategory?.length > 0 ? (
+        allCategory?.map((category) => (
           <SwiperProducts
             key={category}
             category={category}
