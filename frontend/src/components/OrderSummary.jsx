@@ -4,8 +4,8 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "public/src/components/ui/card";
-import { Separator } from "public/src/components/ui/separator";
+} from "/src/components/ui/card";
+import { Separator } from "/src/components/ui/separator";
 
 export default function OrderSummary({ cart, subTotal, shipping, tax, Total }) {
   return (

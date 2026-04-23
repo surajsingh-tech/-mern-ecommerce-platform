@@ -1,6 +1,6 @@
 import { CheckCircle, Package, ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "public/src/components/ui/button";
-import { Card, CardContent } from "public/src/components/ui/card";
+import { Button } from "/src/components/ui/button";
+import { Card, CardContent } from "/src/components/ui/card";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function OrderSuccess() {

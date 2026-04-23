@@ -1,4 +1,4 @@
-import { Input } from "public/src/components/ui/input";
+import { Input } from "/src/components/ui/input";
 import { Edit, Loader2, Search, Trash2 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import {
@@ -7,8 +7,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "public/src/components/ui/select";
-import { Button } from "public/src/components/ui/button";
+} from "/src/components/ui/select";
+import { Button } from "/src/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -17,16 +17,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "public/src/components/ui/dialog";
-import { Field } from "public/src/components/ui/field";
-import { Label } from "public/src/components/ui/label";
+} from "/src/components/ui/dialog";
+import { Field } from "/src/components/ui/field";
+import { Label } from "/src/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "public/src/components/ui/card";
-import ImageUpload from "public/src/components/ImageUpload";
+import { Card } from "/src/components/ui/card";
+import ImageUpload from "/src/components/ImageUpload";
 import axios from "axios";
 import { toast } from "sonner";
-import { setProduct } from "public/src/redux/productSlice";
-import { Textarea } from "public/src/components/ui/textarea";
+import { setProduct } from "/src/redux/productSlice";
+import { Textarea } from "/src/components/ui/textarea";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,9 +37,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "public/src/components/ui/alert-dialog";
-import useDebounce from "public/src/hooks/useDebounce";
-import NoDataAvailable from "public/src/components/NoDataAvailable";
+} from "/src/components/ui/alert-dialog";
+import useDebounce from "/src/hooks/useDebounce";
+import NoDataAvailable from "/src/components/NoDataAvailable";
 import { useSearchParams } from "react-router-dom";
 
 export default function AdminProduct() {

@@ -6,16 +6,16 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "public/src/components/ui/select";
-import FilterSidebar from "public/src/components/FilterSidebar";
-import ProductCard from "public/src/components/ProductCard";
+} from "/src/components/ui/select";
+import FilterSidebar from "/src/components/FilterSidebar";
+import ProductCard from "/src/components/ProductCard";
 import axios from "axios";
 import { toast } from "sonner";
-import Loader from "public/src/components/Loader";
-import NoDataAvailable from "public/src/components/NoDataAvailable";
-import { Button } from "public/src/components/ui/button";
+import Loader from "/src/components/Loader";
+import NoDataAvailable from "/src/components/NoDataAvailable";
+import { Button } from "/src/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "public/src/redux/productSlice";
+import { setProduct } from "/src/redux/productSlice";
 import { useSearchParams } from "react-router-dom";
 
 export default function Products() {

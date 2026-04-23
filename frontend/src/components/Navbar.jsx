@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
-import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "public/src/redux/userSlice";
-import { setCart } from "public/src/redux/productSlice";
+import { setCart } from "src/redux/productSlice";
+import { setUser } from "src/redux/userSlice";
 
 export default function Navbar() {
   const navigate = useNavigate();

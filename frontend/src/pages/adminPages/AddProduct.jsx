@@ -6,16 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "public/src/components/ui/card";
-import { Label } from "public/src/components/ui/label";
-import { Input } from "public/src/components/ui/input";
-import { Textarea } from "public/src/components/ui/textarea";
-import ImageUpload from "public/src/components/ImageUpload";
-import { Button } from "public/src/components/ui/button";
+} from "/src/components/ui/card";
+import { Label } from "/src/components/ui/label";
+import { Input } from "/src/components/ui/input";
+import { Textarea } from "/src/components/ui/textarea";
+import ImageUpload from "/src/components/ImageUpload";
+import { Button } from "/src/components/ui/button";
 import { toast } from "sonner";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "public/src/redux/productSlice";
+import { setProduct } from "/src/redux/productSlice";
 import { Loader2 } from "lucide-react";
 
 export default function AddProduct() {

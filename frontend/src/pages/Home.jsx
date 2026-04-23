@@ -1,6 +1,6 @@
-import Features from "public/src/components/Features";
-import Hero from "public/src/components/Hero";
-import SwiperProducts from "public/src/components/SwiperProducts";
+import Features from "/src/components/Features";
+import Hero from "/src/components/Hero";
+import SwiperProducts from "/src/components/SwiperProducts";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

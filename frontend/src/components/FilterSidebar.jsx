@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import useDebounce from "public/src/hooks/useDebounce";
+import useDebounce from "/src/hooks/useDebounce";
 import { Search } from "lucide-react";
 
 export default function FilterSidebar({

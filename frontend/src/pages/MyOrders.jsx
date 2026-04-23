@@ -1,5 +1,4 @@
-import NoDataAvailable from "public/src/components/NoDataAvailable";
-import OrderCart from "public/src/components/OrderCart";
+import OrderCart from "/src/components/OrderCart";
 
 import axios from "axios";
 

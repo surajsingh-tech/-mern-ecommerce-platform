@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Spinner } from "public/src/components/ui/spinner";
-import { Button } from "public/src/components/ui/button";
+import { Spinner } from "/src/components/ui/spinner";
+import { Button } from "/src/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "public/src/components/ui/card";
-import { Input } from "public/src/components/ui/input";
-import { Label } from "public/src/components/ui/label";
+} from "/src/components/ui/card";
+import { Input } from "/src/components/ui/input";
+import { Label } from "/src/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import * as yup from "yup";
-import { setUser } from "public/src/redux/userSlice";
+import { setUser } from "/src/redux/userSlice";
 import { useDispatch } from "react-redux";
 
 const schema = yup.object().shape({

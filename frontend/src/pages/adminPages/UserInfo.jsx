@@ -1,6 +1,6 @@
-import { Button } from "public/src/components/ui/button";
+import { Button } from "/src/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { Label } from "public/src/components/ui/label";
+import { Label } from "/src/components/ui/label";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import UserLogo from "../../assets/user.jpg";
@@ -9,9 +9,9 @@ import { toast } from "sonner";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "public/src/components/ui/radio-group";
+} from "/src/components/ui/radio-group";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "public/src/redux/userSlice";
+import { setUser } from "/src/redux/userSlice";
 
 export default function UserInfo() {
   const [userData, setUserData] = useState("");

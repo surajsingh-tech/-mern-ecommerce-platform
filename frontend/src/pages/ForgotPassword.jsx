@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "public/src/components/ui/button";
+import { Button } from "/src/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "public/src/components/ui/card";
-import { Input } from "public/src/components/ui/input";
-import { Label } from "public/src/components/ui/label";
+} from "/src/components/ui/card";
+import { Input } from "/src/components/ui/input";
+import { Label } from "/src/components/ui/label";
 import { Mail } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";

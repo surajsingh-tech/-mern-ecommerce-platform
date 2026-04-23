@@ -1,12 +1,13 @@
-import { Button } from "public/src/components/ui/button";
 import axios from "axios";
-import { Input } from "public/src/components/ui/input";
+
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { Label } from "public/src/components/ui/label";
+import { Label } from "/src/components/ui/label";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "src/components/ui/button";
+import { Input } from "src/components/ui/input";
 
 export default function ChangePassword() {
   const { email } = useParams();
