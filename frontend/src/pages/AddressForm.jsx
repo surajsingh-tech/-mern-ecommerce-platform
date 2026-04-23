@@ -22,8 +22,7 @@ export default function AddressForm() {
   const { addresses, selectedAddress, cart } = useSelector(
     (store) => store.product,
   );
-  console.log("addresses", addresses);
-
+  
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
 

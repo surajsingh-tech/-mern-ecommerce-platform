@@ -172,7 +172,6 @@ export default function UserInfo() {
                   src={updateUser?.profilePic || UserLogo}
                   alt="Profile"
                   onClick={() => {
-                    console.log("clicked", updateUser?.profilePic);
                     updateUser?.profilePic && setShowPreview(true);
                   }}
                   className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-pink-500 shadow-lg cursor-pointer transition group-hover:scale-105"

@@ -25,8 +25,6 @@ export default function ShowUserOrders() {
         setUserOrder(res?.data?.orders);
       }
     } catch (error) {
-      console.log("ERRor is", error);
-
       if (error.response) {
         toast.error(error.response?.data?.message);
       } else {
@@ -38,7 +36,6 @@ export default function ShowUserOrders() {
   };
   useEffect(() => {
     getUserOrder();
-    console.log("userOrder", userOrder);
   }, []);
   return <OrderCart userOrder={userOrder} loading={loading} />;
 }
