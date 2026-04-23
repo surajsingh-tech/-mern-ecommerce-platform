@@ -1,5 +1,5 @@
-import { Alert, AlertDescription } from "/src/components/ui/alert";
-import { Button } from "/src/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "/src/components/ui/card";
-import { Input } from "/src/components/ui/input";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { CheckCircle, Loader2, RotateCcw } from "lucide-react";
 import React, { useRef, useState } from "react";

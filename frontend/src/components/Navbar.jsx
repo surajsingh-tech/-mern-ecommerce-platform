@@ -5,8 +5,11 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "src/redux/productSlice";
-import { setUser } from "src/redux/userSlice";
+
+import { setUser } from "@/redux/userSlice";
+import { setCart } from "@/redux/productSlice";
+
+
 
 export default function Navbar() {
   const navigate = useNavigate();

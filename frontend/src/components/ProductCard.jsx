@@ -4,7 +4,7 @@ import { Edit, Loader2, ShoppingCart } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "/src/redux/productSlice";
+import { setCart } from "@/redux/productSlice";
 import { useNavigate } from "react-router-dom";
 
 

@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "/src/redux/productSlice";
+import { setCart } from "@/redux/productSlice";
 import { Loader2, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -142,12 +142,11 @@ export default function ProductDesc({ product }) {
         <p className="font-semibold text-sm w-full sm:w-auto">Qty:</p>
 
         <div className="flex items-center border rounded-lg overflow-hidden w-fit">
-          {/* Minus */}
           <button
             type="button"
             onClick={() => handleQtyValue(qty - 1)}
             disabled={qty <= 1}
-            className="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-base sm:text-lg"
+            className="px-3 sm:px-4 py-2 bg-pink-500 hover:bg-pink-600 disabled:opacity-40 text-white text-base sm:text-lg"
           >
             -
           </button>
@@ -163,12 +162,11 @@ export default function ProductDesc({ product }) {
             className="w-12 sm:w-16 text-center border-none focus-visible:ring-0 text-sm sm:text-base"
           />
 
-          {/* Plus */}
           <button
             type="button"
             onClick={() => handleQtyValue(qty + 1)}
             disabled={qty >= 1000}
-            className="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-base sm:text-lg"
+            className="px-3 sm:px-4 py-2 bg-pink-500 hover:bg-pink-600 disabled:opacity-40 text-white text-base sm:text-lg"
           >
             +
           </button>

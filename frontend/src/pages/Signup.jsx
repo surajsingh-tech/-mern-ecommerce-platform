@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Spinner } from "/src/components/ui/spinner";
-import { Button } from "/src/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,9 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "/src/components/ui/card";
-import { Input } from "/src/components/ui/input";
-import { Label } from "/src/components/ui/label";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";

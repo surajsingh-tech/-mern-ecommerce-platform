@@ -1,7 +1,7 @@
 import React from "react";
-import { Separator } from "/src/components/ui/separator";
-import Footer from "/src/components/Footer";
-import Features from "/src/components/Features";
+import { Separator } from "@/components/ui/separator";
+import Footer from "@/components/Footer";
+import Features from "@/components/Features";
 
 export default function About() {
   return (

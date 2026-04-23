@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "/src/components/ui/card";
+} from "@/components/ui/card";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";

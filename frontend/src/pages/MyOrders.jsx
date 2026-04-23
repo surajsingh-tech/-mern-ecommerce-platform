@@ -1,4 +1,4 @@
-import OrderCart from "/src/components/OrderCart";
+import OrderCart from "@/components/OrderCart";
 
 import axios from "axios";
 

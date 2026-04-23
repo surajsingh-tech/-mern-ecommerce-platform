@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "/src/components/ui/card";
+
 import {
   Laptop,
   ShieldCheck,
@@ -10,6 +10,8 @@ import {
   BadgeCheck,
   Boxes,
 } from "lucide-react";
+import { Card, CardContent } from "./ui/card";
+
 
 export default function Features() {
   const features = [

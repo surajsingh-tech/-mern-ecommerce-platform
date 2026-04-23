@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "/src/components/ui/table";
-import { Badge } from "/src/components/ui/badge";
-import Loader from "/src/components/Loader";
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import Loader from "@/components/Loader";
 
 export default function AdminOrders() {
   const [allOrders, setAllOrders] = useState([]);

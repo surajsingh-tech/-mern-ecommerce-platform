@@ -17,16 +17,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "/src/components/ui/dialog";
-import { Field } from "/src/components/ui/field";
-import { Label } from "/src/components/ui/label";
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
+import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "/src/components/ui/card";
-import ImageUpload from "/src/components/ImageUpload";
+import { Card } from "@/components/ui/card";
+import ImageUpload from "@/components/ImageUpload";
 import axios from "axios";
 import { toast } from "sonner";
-import { setProduct } from "/src/redux/productSlice";
-import { Textarea } from "/src/components/ui/textarea";
+import { setProduct } from "@/redux/productSlice";
+import { Textarea } from "@/components/ui/textarea";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,9 +37,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "/src/components/ui/alert-dialog";
-import useDebounce from "/src/hooks/useDebounce";
-import NoDataAvailable from "/src/components/NoDataAvailable";
+} from "@/components/ui/alert-dialog";
+import useDebounce from "@/hooks/useDebounce";
+import NoDataAvailable from "@/components/NoDataAvailable";
 import { useSearchParams } from "react-router-dom";
 
 export default function AdminProduct() {

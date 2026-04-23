@@ -3,11 +3,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { Label } from "/src/components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "src/components/ui/button";
-import { Input } from "src/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function ChangePassword() {
   const { email } = useParams();

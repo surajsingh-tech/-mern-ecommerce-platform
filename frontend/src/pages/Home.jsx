@@ -1,12 +1,14 @@
-import Features from "/src/components/Features";
-import Hero from "/src/components/Hero";
-import SwiperProducts from "/src/components/SwiperProducts";
-import React, { useEffect } from "react";
+import Loader from "@/components/Loader";
+import Features from "@/components/Features";
+import Hero from "@/components/Hero";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SwiperProducts from "@/components/SwiperProducts";
+import { toast } from "sonner";
 
 export default function Home() {
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   const getAllProducts = async () => {
     try {
       setLoading(true);
@@ -27,7 +29,7 @@ export default function Home() {
     }
   };
 
-  const productsData = useSelector((store) => store.product.products || []);
+  const productsData = useSelector((store) => store.product?.products || []);
   const allCategory = [...new Set(productsData?.map((p) => p?.category))];
 
   useEffect(() => {
@@ -36,7 +38,9 @@ export default function Home() {
   return (
     <div className="pt-10">
       <Hero />
-      {productsData.length > 0 && allCategory.length > 0 ? (
+      {loading ? (
+        <Loader />
+      ) : productsData.length > 0 && allCategory.length > 0 ? (
         allCategory.map((category) => (
           <SwiperProducts
             key={category}
@@ -49,6 +53,7 @@ export default function Home() {
           No products available right now.
         </p>
       )}
+
       <Features />
     </div>
   );

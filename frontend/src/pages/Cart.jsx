@@ -1,14 +1,14 @@
-import NoDataAvailable from "/src/components/NoDataAvailable";
-import { Button } from "/src/components/ui/button";
+import NoDataAvailable from "@/components/NoDataAvailable";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "/src/components/ui/card";
-import { Input } from "/src/components/ui/input";
-import { Separator } from "/src/components/ui/separator";
-import { setCart } from "/src/redux/productSlice";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { setCart } from "@/redux/productSlice";
 import axios from "axios";
 import { Trash2 } from "lucide-react";
 import React, { useEffect } from "react";

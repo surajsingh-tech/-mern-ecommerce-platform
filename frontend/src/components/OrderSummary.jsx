@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "/src/components/ui/card";
-import { Separator } from "/src/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 export default function OrderSummary({ cart, subTotal, shipping, tax, Total }) {
   return (
