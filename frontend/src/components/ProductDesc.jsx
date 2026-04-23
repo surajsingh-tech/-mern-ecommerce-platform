@@ -29,7 +29,7 @@ export default function ProductDesc({ product }) {
       }
 
       const res = await axios.post(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/add`,
+        `${import.meta.env.VITE_URL}/api/v1/cart/add`,
         { productId, quantity: qty },
         {
           headers: {
@@ -71,7 +71,7 @@ export default function ProductDesc({ product }) {
       }
 
       const res = await axios.post(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/add`,
+        `${import.meta.env.VITE_URL}/api/v1/cart/add`,
         { productId, quantity: qty },
         {
           headers: {
@@ -138,17 +138,41 @@ export default function ProductDesc({ product }) {
       </div>
 
       {/* Quantity */}
-      <div className="flex items-center gap-3 mt-2">
-        <p className="font-semibold text-sm">Qty:</p>
-        <Input
-          readOnly={isAdmin}
-          type="number"
-          value={qty}
-          min={1}
-          max={1000}
-          className="w-16 text-center"
-          onChange={(e) => handleQtyValue(Number(e.target.value))}
-        />
+      <div className="flex items-center gap-3 mt-2 flex-wrap">
+        <p className="font-semibold text-sm w-full sm:w-auto">Qty:</p>
+
+        <div className="flex items-center border rounded-lg overflow-hidden w-fit">
+          {/* Minus */}
+          <button
+            type="button"
+            onClick={() => handleQtyValue(qty - 1)}
+            disabled={qty <= 1}
+            className="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-base sm:text-lg"
+          >
+            -
+          </button>
+
+          {/* Input */}
+          <Input
+            readOnly={isAdmin}
+            type="number"
+            value={qty}
+            min={1}
+            max={1000}
+            onChange={(e) => handleQtyValue(Number(e.target.value))}
+            className="w-12 sm:w-16 text-center border-none focus-visible:ring-0 text-sm sm:text-base"
+          />
+
+          {/* Plus */}
+          <button
+            type="button"
+            onClick={() => handleQtyValue(qty + 1)}
+            disabled={qty >= 1000}
+            className="px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-base sm:text-lg"
+          >
+            +
+          </button>
+        </div>
       </div>
 
       {/* Buttons */}

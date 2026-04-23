@@ -20,7 +20,7 @@ export default function Navbar() {
   const logoutHandler = async () => {
     try {
       const res = await axios.post(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/logout",
+        `${import.meta.env.VITE_URL}/api/v1/user/logout`,
         {},
         {
           headers: {

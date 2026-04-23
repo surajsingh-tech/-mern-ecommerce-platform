@@ -29,7 +29,7 @@ export default function Cart() {
   const handleUpdateQuantity = async (productId, type) => {
     try {
       const res = await axios.put(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/update",
+        `${import.meta.env.VITE_URL}/api/v1/cart/update`,
         { productId, type },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -47,7 +47,7 @@ export default function Cart() {
   const removeProductFromCart = async (productId) => {
     try {
       const res = await axios.delete(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/remove",
+        `${import.meta.env.VITE_URL}/api/v1/cart/remove`,
         {
           data: { productId },
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -69,7 +69,7 @@ export default function Cart() {
   const loadCart = async () => {
     try {
       const res = await axios.get(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart",
+        `${import.meta.env.VITE_URL}/api/v1/cart`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         },

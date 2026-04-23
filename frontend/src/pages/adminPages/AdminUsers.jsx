@@ -33,7 +33,7 @@ export default function AdminUsers() {
   const getAllUsres = async () => {
     try {
       const res = await axios.get(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/admin/all-users",
+        `${import.meta.env.VITE_URL}/api/v1/admin/all-users`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -96,7 +96,7 @@ export default function Profile() {
       }
 
       const res = await axios.put(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/update/${userId}`,
+        `${import.meta.env.VITE_URL}/api/v1/user/update/${userId}`,
         formData,
         {
           headers: {

@@ -97,7 +97,7 @@ export default function FilterSidebar({
                 value={item}
                 type="radio"
                 checked={category === item}
-                className="accent-pink-600"
+                className="w-4 h-4 accent-pink-600 cursor-pointer"
               />
               {item}
             </div>

@@ -13,7 +13,7 @@ export default function Verify() {
     try {
       setLoading(true);
       const res = await axios.post(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/reverify",
+        `${import.meta.env.VITE_URL}/api/v1/user/reverify`,
         { email },
         {
           headers: {

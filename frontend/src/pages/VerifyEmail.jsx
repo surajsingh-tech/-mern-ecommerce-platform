@@ -12,7 +12,7 @@ export default function VerifyEmail() {
   const verifyEmail = async () => {
     try {
       const res = await axios.post(
-        "https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/user/verify",
+        `${import.meta.env.VITE_URL}/api/v1/user/verify`,
         {},
         {
           headers: {

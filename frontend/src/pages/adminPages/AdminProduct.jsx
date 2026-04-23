@@ -120,7 +120,7 @@ export default function AdminProduct() {
     try {
       setLoader(true);
       const res = await axios.put(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/update/${editProduct._id}`,
+        `${import.meta.env.VITE_URL}/api/v1/product/update/${editProduct._id}`,
         formData,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
@@ -144,7 +144,7 @@ export default function AdminProduct() {
     setDltId(id);
     try {
       const res = await axios.delete(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/product/delete/${id}`,
+        `${import.meta.env.VITE_URL}/api/v1/product/delete/${id}`,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
 

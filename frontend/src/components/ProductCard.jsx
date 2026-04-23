@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
     try {
       setLoader(true);
       const res = await axios.post(
-        `https://mern-ecommerce-platform-l9bi.onrender.com/api/v1/cart/add`,
+        `${import.meta.env.VITE_URL}/api/v1/cart/add`,
         { productId },
         {
           headers: {
