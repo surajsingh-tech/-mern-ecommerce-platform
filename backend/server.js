@@ -5,7 +5,7 @@ import userRoute from "./routes/userRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import productRoute from "./routes/productRoute.js";
 import oderRoutes from "./routes/orderRoute.js";
-import adminRoutes from './routes/adminRoutes.js'; 
+import adminRoutes from "./routes/adminRoutes.js";
 import cors from "cors";
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://mern-ecommerce-platform-seven.vercel.app"],
     credentials: true,
   }),
 );
@@ -23,7 +23,16 @@ app.use("/api/v1/product", productRoute);
 app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/orders", oderRoutes);
 app.use("/api/v1/admin", adminRoutes);
-app.listen(PORT, () => {
-  connectDB();
-  console.log(`Server is listen at PORT  http://localhost:${PORT}`);
+//Test route
+app.get("/", (req, res) => {
+  res.send("API is working 🚀");
 });
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on PORT ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("DB Connection Failed ❌", err);
+  });
