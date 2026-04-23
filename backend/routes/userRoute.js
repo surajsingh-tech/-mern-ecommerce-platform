@@ -11,6 +11,7 @@ import {
   changePassword,
   getUserById,
   updateUserProfile,
+  getUserAddress,
 } from "../controllers/userController.js";
 import { isAdmin, isAuthanticated } from "../middleware/isAuthanticated.js";
 import { getAllUsers } from "../controllers/adminController.js";
@@ -25,6 +26,7 @@ router.post("/forgot-password", forgotPassword);
 router.post("/verify-otp/:email", verifyOTP);
 router.post("/change-password/:email", changePassword);
 router.get("/get-user/:userId", getUserById);
+router.get("/get-address", isAuthanticated, getUserAddress);
 router.put("/update/:userId", isAuthanticated , singleUpload,updateUserProfile);
 
 export default router;

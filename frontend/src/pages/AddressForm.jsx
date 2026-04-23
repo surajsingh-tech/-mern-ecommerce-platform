@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
   deleteAddress,
+  setAddresses,
   setCart,
   setSelectedAddress,
 } from "@/redux/productSlice";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { addressSchema } from "../validation/addressSchema.js";
 import OrderSummary from "@/components/OrderSummary.jsx";
 
@@ -21,6 +22,7 @@ export default function AddressForm() {
   const { addresses, selectedAddress, cart } = useSelector(
     (store) => store.product,
   );
+  console.log("addresses", addresses);
 
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
@@ -91,6 +93,10 @@ export default function AddressForm() {
 
   const handlePayment = async () => {
     try {
+      if (selectedAddress === null) {
+        return toast.error("Please select an address");
+      }
+
       const { data } = await axios.post(
         `${import.meta.env.VITE_URL}/api/v1/orders/create-order`,
         {
@@ -159,6 +165,38 @@ export default function AddressForm() {
     }
   };
 
+  const getAddress = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_URL}/api/v1/user/get-address`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      if (res.data.success) {
+        dispatch(setAddresses(res.data.address || []));
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response?.data?.message);
+      } else {
+        toast.error(error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAddress();
+  }, []);
+
+  useEffect(() => {
+    if (addresses.length > 0) {
+      setShowForm(false);
+    }
+  }, [addresses]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6  pt-20">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
@@ -170,18 +208,20 @@ export default function AddressForm() {
 
           {showForm ? (
             <>
-              <Button
-                variant="ghost"
-                className="mb-3"
-                onClick={() => setShowForm(false)}
-              >
-                <ArrowLeft size={18} />
-              </Button>
-
-              <div className="bg-white shadow rounded-2xl border p-4 sm:p-6">
+              <div className="flex gap-3">
+                <Button
+                  variant="ghost"
+                  className="mb-3"
+                  onClick={() => setShowForm(false)}
+                >
+                  <ArrowLeft size={18} />
+                </Button>
                 <p className="text-gray-500 text-sm sm:text-base my-1">
                   Fill your delivery details
                 </p>
+              </div>
+
+              <div className="bg-white shadow rounded-2xl border p-4 sm:p-6">
                 <form
                   onSubmit={handleSubmit}
                   className="space-y-4 sm:space-y-6"
@@ -198,7 +238,7 @@ export default function AddressForm() {
                       "country",
                     ].map((name) => (
                       <div key={name}>
-                        <Label className="capitalize">{name}</Label>
+                        <Label className="capitalize p-1.5">{name}</Label>
                         <Input
                           name={name}
                           value={formData[name]}
@@ -217,7 +257,7 @@ export default function AddressForm() {
             <div className="space-y-4">
               <h2 className="font-semibold text-lg">Saved Addresses</h2>
 
-              {addresses.map((address, i) => (
+              {addresses?.map((address, i) => (
                 <div
                   key={i}
                   onClick={() => dispatch(setSelectedAddress(i))}
@@ -227,10 +267,14 @@ export default function AddressForm() {
                       : "border-gray-300"
                   }`}
                 >
-                  <p className="font-medium">{address.fullName}</p>
-                  <p className="text-sm">{address.email}</p>
+                  <p className="font-medium">
+                    {address?.fullName || address?.firstName}
+                  </p>
+                  {console.log("address", address)}
                   <p className="text-sm">
-                    {address.city}, {address.state}
+                    {address?.email}, {address?.city}, {address?.address}{" "}
+                    {address?.state} , {address?.zipCode} , {address?.phoneNo}{" "}
+                    {address?.country}
                   </p>
 
                   <Button

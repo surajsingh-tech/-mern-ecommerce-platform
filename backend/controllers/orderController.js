@@ -2,10 +2,16 @@ import razorpayInstance from "../config/razorpay.js";
 import { Order } from "../models/orderModel.js";
 import { Cart } from "../models/cartModel.js";
 import crypto from "crypto";
-import { trusted } from "mongoose";
 
 export const createOrder = async (req, res) => {
   try {
+    const userId = req.user._id;
+    if (!userId) {
+      return res.status(404).json({
+        success: false,
+        message: "user not found",
+      });
+    }
     const { products, amount, tax, shipping, currency } = req.body;
 
     if (!amount || !products?.length) {
@@ -15,13 +21,11 @@ export const createOrder = async (req, res) => {
       });
     }
 
-    const options = {
-      amount: Math.round(Number(amount) * 100), // rupees → paise
+    const razorpayOrder = await razorpayInstance.orders.create({
+      amount: Math.round(amount * 100), // rupees → paise
       currency: currency || "INR",
       receipt: "receipt_" + Date.now(),
-    };
-
-    const razorpayOrder = await razorpayInstance.orders.create(options);
+    });
 
     const newOrder = await Order.create({
       user: req.user._id,
@@ -79,13 +83,22 @@ export const verifyPayment = async (req, res) => {
     }
 
     const order = await Order.findOneAndUpdate(
-      { razorpayOrderId: razorpay_order_id },
+      { razorpayOrderId: razorpay_order_id, user: userId },
       {
         status: "Paid",
         razorpayPaymentId: razorpay_payment_id,
       },
-      { returnDocument: "after" },
+      { new: true },
     );
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    await Cart.findOneAndDelete({ userId : userId });
 
     res.json({
       success: true,
@@ -99,7 +112,13 @@ export const verifyPayment = async (req, res) => {
 
 export const getMyOrder = async (req, res) => {
   try {
-    const userId = req.id;
+    const userId = req.user._id;
+    if (!userId) {
+      return res.status(404).json({
+        success: false,
+        message: "user not found",
+      });
+    }
     const orders = await Order.find({ user: userId })
       .populate({
         path: "products.productId",

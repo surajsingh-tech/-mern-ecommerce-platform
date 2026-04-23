@@ -57,7 +57,7 @@ export default function OrderSuccess() {
 
             {/* BUTTONS */}
             <div className="flex flex-col gap-3 pt-2">
-              <Button className="w-full rounded-xl bg-pink-600 hover:bg-pink-700">
+              <Button className="w-full rounded-xl bg-pink-600 hover:bg-pink-700" onClick={() => navigate("/orders")}>
                 Track Order
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>

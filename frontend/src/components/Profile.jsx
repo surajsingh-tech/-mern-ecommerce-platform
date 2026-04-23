@@ -22,7 +22,7 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { user } = useSelector((store) => store.user);
 
@@ -127,7 +127,12 @@ export default function Profile() {
             <div>
               <div className="flex flex-col justify-center align-center items-center bg-gray-100">
                 <div className="flex items-center justify-center">
-                  <Button onClick={() => navigate(-1)} variant="outline" size="icon" className='items-center mr-6 w-[80px] h-10 bg-pink-600 text-white hover:bg-black hover:text-white'>
+                  <Button
+                    onClick={() => navigate(-1)}
+                    variant="outline"
+                    size="icon"
+                    className="items-center mr-6 w-[80px] h-10 bg-pink-600 text-white hover:bg-black hover:text-white"
+                  >
                     <ArrowLeft />
                   </Button>
                   <h1 className="font-bold mb-7 text-2xl sm:text-3xl md:text-4xl lg:text-7xl text-gray-800">

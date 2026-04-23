@@ -111,14 +111,13 @@ export const getSalesData = async (req, res) => {
       amount: item.amount,
     }));
 
-    console.log("formattedSales is ", formattedSales);
-
     return res.json({
       success: true,
       totalUsers,
       totalProducts,
       totalOrders,
       salesByDate,
+      totalSales,
       sales: formattedSales,
     });
   } catch (error) {

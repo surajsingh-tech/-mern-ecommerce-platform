@@ -29,7 +29,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-     currency: { type: String, default: "INR" },
+    currency: { type: String, default: "INR" },
     status: {
       type: String,
       enum: ["Pending", "Paid", "Failed"],
@@ -40,7 +40,6 @@ const orderSchema = new mongoose.Schema(
     razorpayOrderId: { type: String },
     razorpayPaymentId: { type: String },
     razorpaySignature: { type: String },
-    
   },
   { timestamps: true },
 );
