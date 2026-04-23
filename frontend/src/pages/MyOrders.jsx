@@ -1,5 +1,5 @@
-import NoDataAvailable from "@/components/NoDataAvailable";
-import OrderCart from "@/components/OrderCart";
+import NoDataAvailable from "public/src/components/NoDataAvailable";
+import OrderCart from "public/src/components/OrderCart";
 
 import axios from "axios";
 
@@ -8,9 +8,9 @@ import { toast } from "sonner";
 
 export default function MyOrders() {
   const accessToken = localStorage.getItem("accessToken");
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [userOrder, setUserOrder] = useState([]);
- 
+
   const getUserOrders = async () => {
     try {
       setLoading(true);
@@ -38,7 +38,5 @@ export default function MyOrders() {
     getUserOrders();
   }, []);
 
-  return (
-    <OrderCart userOrder={userOrder} loading={loading}/>
-  );
+  return <OrderCart userOrder={userOrder} loading={loading} />;
 }

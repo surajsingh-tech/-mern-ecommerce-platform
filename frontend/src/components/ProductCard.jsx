@@ -4,9 +4,9 @@ import { Edit, Loader2, ShoppingCart } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "@/redux/productSlice";
+import { setCart } from "public/src/redux/productSlice";
 import { useNavigate } from "react-router-dom";
-import store from "@/redux/store";
+import store from "public/src/redux/store";
 
 export default function ProductCard({ product }) {
   if (!product) return null;

@@ -5,18 +5,23 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Label } from "@/components/ui/label";
+} from "public/src/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "public/src/components/ui/tabs";
+import { Label } from "public/src/components/ui/label";
 import { Button } from "./ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "sonner";
-import { setUser } from "@/redux/userSlice";
+import { setUser } from "public/src/redux/userSlice";
 import UserLogo from "../assets/user.jpg";
-import MyOrders from "@/pages/MyOrders";
+import MyOrders from "public/src/pages/MyOrders";
 export default function Profile() {
   const { userId } = useParams();
 

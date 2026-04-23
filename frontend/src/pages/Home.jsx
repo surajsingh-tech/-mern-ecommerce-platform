@@ -1,6 +1,6 @@
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import SwiperProducts from "@/components/SwiperProducts";
+import Features from "public/src/components/Features";
+import Hero from "public/src/components/Hero";
+import SwiperProducts from "public/src/components/SwiperProducts";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -14,7 +14,7 @@ export default function Home() {
       {productsData.length > 0 && allCategory.length > 0 ? (
         allCategory.map((category) => (
           <SwiperProducts
-            key={category} 
+            key={category}
             category={category}
             products={productsData?.filter((p) => p?.category === category)}
           />

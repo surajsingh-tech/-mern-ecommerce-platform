@@ -1,6 +1,6 @@
 import { CheckCircle, Package, ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "public/src/components/ui/button";
+import { Card, CardContent } from "public/src/components/ui/card";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function OrderSuccess() {
@@ -57,7 +57,10 @@ export default function OrderSuccess() {
 
             {/* BUTTONS */}
             <div className="flex flex-col gap-3 pt-2">
-              <Button className="w-full rounded-xl bg-pink-600 hover:bg-pink-700" onClick={() => navigate("/orders")}>
+              <Button
+                className="w-full rounded-xl bg-pink-600 hover:bg-pink-700"
+                onClick={() => navigate("/orders")}
+              >
                 Track Order
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>

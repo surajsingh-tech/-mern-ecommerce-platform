@@ -1,5 +1,5 @@
 // components/Loader.tsx
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "public/src/components/ui/skeleton";
 
 export default function Loader() {
   return (

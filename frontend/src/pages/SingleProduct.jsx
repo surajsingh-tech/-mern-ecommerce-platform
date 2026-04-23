@@ -1,7 +1,7 @@
 import React from "react";
 import BreadCrumbs from "./BreadCrumb";
-import ProductImage from "@/components/ProductImage";
-import ProductDesc from "@/components/ProductDesc";
+import ProductImage from "public/src/components/ProductImage";
+import ProductDesc from "public/src/components/ProductDesc";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 

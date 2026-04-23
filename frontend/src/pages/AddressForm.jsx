@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "public/src/components/ui/button.jsx";
+import { Input } from "public/src/components/ui/input.jsx";
+import { Label } from "public/src/components/ui/label.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
@@ -9,20 +9,20 @@ import {
   setAddresses,
   setCart,
   setSelectedAddress,
-} from "@/redux/productSlice";
+} from "public/src/redux/productSlice.js";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { data, useNavigate } from "react-router-dom";
 import { addressSchema } from "../validation/addressSchema.js";
-import OrderSummary from "@/components/OrderSummary.jsx";
+import OrderSummary from "public/src/components/OrderSummary.jsx";
 
 export default function AddressForm() {
   const dispatch = useDispatch();
   const { addresses, selectedAddress, cart } = useSelector(
     (store) => store.product,
   );
-  
+
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
 

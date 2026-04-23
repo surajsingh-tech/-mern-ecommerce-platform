@@ -1,11 +1,11 @@
-import { Input } from "@/components/ui/input";
+import { Input } from "public/src/components/ui/input";
 import axios from "axios";
 import { Edit, Eye, Search } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import UserLogo from "../../assets/user.jpg";
-import { Button } from "@/components/ui/button";
-import useDebounce from "@/hooks/useDebounce";
+import { Button } from "public/src/components/ui/button";
+import useDebounce from "public/src/hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

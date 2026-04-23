@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "public/src/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "public/src/components/ui/card";
+import { Input } from "public/src/components/ui/input";
+import { Label } from "public/src/components/ui/label";
 import { Mail } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
@@ -35,7 +35,7 @@ export default function ForgetPassword() {
 
       if (res.data.success) {
         toast.success("Email send Successfully ");
-        navigate(`/verify-otp/${email}`)
+        navigate(`/verify-otp/${email}`);
       }
     } catch (error) {
       if (error.response) {

@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "@/redux/userSlice";
-import { setCart } from "@/redux/productSlice";
+import { setUser } from "public/src/redux/userSlice";
+import { setCart } from "public/src/redux/productSlice";
 
 export default function Navbar() {
   const navigate = useNavigate();

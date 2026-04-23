@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "public/src/components/ui/button";
 import axios from "axios";
-import { Input } from "@/components/ui/input";
+import { Input } from "public/src/components/ui/input";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { Label } from "@/components/ui/label";
+import { Label } from "public/src/components/ui/label";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 

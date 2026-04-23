@@ -1,6 +1,11 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "public/src/components/ui/card";
+import { Separator } from "public/src/components/ui/separator";
 
 export default function OrderSummary({ cart, subTotal, shipping, tax, Total }) {
   return (

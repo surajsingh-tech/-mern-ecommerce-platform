@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "public/src/components/ui/breadcrumb";
 
 export default function BreadCrumbs({ product }) {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "public/src/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import NoDataAvailable from "./NoDataAvailable";
 import Loader from "./Loader";
