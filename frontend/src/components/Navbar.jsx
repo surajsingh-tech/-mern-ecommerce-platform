@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/userSlice";
 import { setCart } from "@/redux/productSlice";
 
-
-
 export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
