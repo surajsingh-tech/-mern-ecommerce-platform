@@ -230,9 +230,16 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-   
-    await Session.deleteMany({ userId });
-    await User.findByIdAndUpdate(userId, { isLoggedIn: false });
+    // const userId = req.id;
+    // if (!userId) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "User ID is required",
+    //   });
+    // }
+
+    // await Session.deleteMany({ userId });
+    // await User.findByIdAndUpdate(userId, { isLoggedIn: false });
     return res.status(200).json({
       success: true,
       message: "User logout successfully",
