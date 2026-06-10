@@ -24,8 +24,7 @@ export default function AdminSales() {
     totalSales: 0,
     salesByDate: [],
   });
-  console.log("st", stats);
-
+  
   const accessToken = localStorage.getItem("accessToken");
 
   const fetchStats = async () => {
@@ -40,8 +39,6 @@ export default function AdminSales() {
       );
 
       if (res.data.success) {
-        console.log("res", res.data);
-
         setState(res.data);
       }
     } catch (error) {

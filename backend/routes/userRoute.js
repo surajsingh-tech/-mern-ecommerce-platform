@@ -21,7 +21,7 @@ router.post("/register", register);
 router.post("/verify", verify);
 router.post("/reverify", reVerify);
 router.post("/login", login);
-router.post("/logout", isAuthanticated, logout);
+router.post("/logout", logout);
 router.post("/forgot-password", forgotPassword);
 router.post("/verify-otp/:email", verifyOTP);
 router.post("/change-password/:email", changePassword);
